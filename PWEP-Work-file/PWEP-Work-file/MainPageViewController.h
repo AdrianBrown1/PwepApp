@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainPageViewController : UIViewController <UISearchBarDelegate , UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout> 
+@interface MainPageViewController : UIViewController <UISearchBarDelegate , UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 
 

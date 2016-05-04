@@ -7,6 +7,11 @@
 //
 
 #import "MovieCollectionViewCell.h"
+@interface MovieCollectionViewCell ()
+
+@end
+
+
 
 @implementation MovieCollectionViewCell
 

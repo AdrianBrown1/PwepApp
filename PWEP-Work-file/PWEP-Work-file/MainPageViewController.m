@@ -7,9 +7,12 @@
 //
 
 #import "MainPageViewController.h"
+#import "ReloadDataFooterCollectionReusableView.h"
+#import "MovieCollectionViewCell.h"
 
 @interface MainPageViewController ()
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (strong, nonatomic) UISearchBar *sBar;
 
 @end
 
@@ -19,9 +22,10 @@
     [super viewDidLoad];
 
     //Search Bar
-    UISearchBar  *sBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0,10,self.navigationController.navigationBar.bounds.size.width,self.navigationController.navigationBar.bounds.size.height/2)];
-    sBar.delegate = self;
-    [self.navigationController.navigationBar addSubview:sBar];
+    self.sBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0,10,self.navigationController.navigationBar.bounds.size.width,self.navigationController.navigationBar.bounds.size.height/2)];
+   
+    self.sBar.delegate = self;
+    [self.navigationController.navigationBar addSubview:self.sBar];
     
     
     self.collectionView.delegate = self;
@@ -33,9 +37,15 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
    
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    MovieCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
    
     cell.backgroundColor = [UIColor redColor];
+   
+    cell.cellImage.image = [UIImage imageNamed:@"jeremy.jpg"];
+    
+    
+
+    
     
     return cell;
 }
@@ -45,16 +55,40 @@
 }
 
 
+
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"Index path %@",indexPath);
     
 }
 
+//-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//
+//    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+//    
+////    return cell;
+//
+//}
 
 
-- (IBAction)loadStuff:(id)sender {
+// get repeating image to show
+// cell for item at index method
+
+
+
+-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     
-    NSLog(@" Ive been fuckin tapped	"); 
+    UICollectionReusableView *reusableview = nil;
+    
+    if (kind == UICollectionElementKindSectionFooter) {
+        ReloadDataFooterCollectionReusableView *footerview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"reuseIdentifier" forIndexPath:indexPath];
+        
+        //footerview.delegate = self;
+        
+        reusableview = footerview;
+    }
+    
+    return reusableview;
 }
 
 

@@ -23,18 +23,18 @@
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jXP-JQ-g2y">
                                     <size key="itemSize" width="150" height="200"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="50" height="50"/>
+                                    <size key="footerReferenceSize" width="50" height="71"/>
                                     <inset key="sectionInset" minX="30" minY="0.0" maxX="30" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="YdV-89-BQx" customClass="MovieCollectionViewCell">
-                                        <rect key="frame" x="30" y="0.0" width="150" height="200"/>
+                                        <rect key="frame" x="30" y="64" width="150" height="200"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="150" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jeremy.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="ULn-gc-iBT">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ULn-gc-iBT">
                                                     <rect key="frame" x="0.0" y="0.0" width="150" height="200"/>
                                                 </imageView>
                                             </subviews>
@@ -46,23 +46,14 @@
                                             <constraint firstItem="ULn-gc-iBT" firstAttribute="centerY" secondItem="YdV-89-BQx" secondAttribute="centerY" id="k8d-oo-Yzg"/>
                                             <constraint firstItem="ULn-gc-iBT" firstAttribute="height" secondItem="YdV-89-BQx" secondAttribute="height" id="nFJ-GD-hRm"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="cellImage" destination="ULn-gc-iBT" id="gpE-HO-Vhw"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="L9m-PM-qbt" customClass="ReloadDataFooterCollectionReusableView">
-                                    <rect key="frame" x="0.0" y="200" width="600" height="50"/>
+                                <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="reuseIdentifier" id="L9m-PM-qbt" customClass="ReloadDataFooterCollectionReusableView">
+                                    <rect key="frame" x="0.0" y="264" width="600" height="71"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7CV-lB-MHb">
-                                            <rect key="frame" x="277" y="10" width="46" height="30"/>
-                                            <state key="normal" title="Button">
-                                                <color key="titleColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
-                                                <color key="titleShadowColor" red="0.80000001190000003" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="loadStuff:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TbX-on-VtD"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
                                 </collectionReusableView>
                             </collectionView>
                         </subviews>
@@ -226,7 +217,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NGB-nR-k92" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1385" y="-371"/>
+            <point key="canvasLocation" x="1361" y="385"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Ka4-c5-J7r">
@@ -239,12 +230,12 @@
                     </tabBar>
                     <connections>
                         <segue destination="Y4O-y6-yPF" kind="relationship" relationship="viewControllers" id="WQa-gY-05O"/>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="PS2-KC-PAT"/>
+                        <segue destination="31X-1z-cpM" kind="relationship" relationship="viewControllers" id="Tv0-1G-Ahp"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aLz-Kb-7uS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1239" y="391"/>
+            <point key="canvasLocation" x="629" y="343"/>
         </scene>
         <!--Item-->
         <scene sceneID="fcd-gV-zdJ">
@@ -266,10 +257,4 @@
             <point key="canvasLocation" x="907" y="1120"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="jeremy.jpg" width="352" height="207"/>
-    </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="PS2-KC-PAT"/>
-    </inferredMetricsTieBreakers>
 </document>
