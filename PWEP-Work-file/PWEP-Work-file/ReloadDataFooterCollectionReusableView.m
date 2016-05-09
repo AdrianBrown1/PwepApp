@@ -40,6 +40,8 @@
     [button.centerXAnchor constraintEqualToAnchor:self.centerXAnchor];
     [button.centerYAnchor constraintEqualToAnchor:self.centerYAnchor];
     [button sizeToFit];
+    [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    
     button.center = self.center;
     
     [self addSubview:button];

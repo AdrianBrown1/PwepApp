@@ -25,7 +25,9 @@
     self.sBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0,10,self.navigationController.navigationBar.bounds.size.width,self.navigationController.navigationBar.bounds.size.height/2)];
    
     self.sBar.delegate = self;
-    [self.navigationController.navigationBar addSubview:self.sBar];
+    self.navigationItem.titleView = self.sBar;
+    
+    	//[self.navigationController.navigationBar addSubview:self.sBar];
     
     
     self.collectionView.delegate = self;
@@ -70,12 +72,6 @@
 //
 //}
 
-
-// get repeating image to show
-// cell for item at index method
-
-
-
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     
     UICollectionReusableView *reusableview = nil;
@@ -95,7 +91,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 

@@ -10,6 +10,8 @@
 
 @implementation OmdbAPi
 
+// NSoperation que
+// Image downloading collectionview operation
 
 
 
