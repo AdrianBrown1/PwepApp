@@ -9,11 +9,15 @@
 #import "MainPageViewController.h"
 #import "ReloadDataFooterCollectionReusableView.h"
 #import "MovieCollectionViewCell.h"
+#import "Movie.h"
 
 @interface MainPageViewController ()
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) UISearchBar *sBar;
+@property (weak, nonatomic)UIButton *button;
 
+
+@property (nonatomic, strong)NSArray *array; 
 @end
 
 @implementation MainPageViewController
@@ -35,11 +39,41 @@
     
     [self.view addSubview:self.collectionView];
     
+    
+    // ask professor about this
+    [self buttonPressed:self.button];
+    
+    NSString *starwars = [NSString stringWithFormat:@"s=star+wars&page=1"];
+    
+    [OmdbAPi getMoviesForSelection:starwars WithCompletion:^(NSArray *movies) {
+        
+        // CONCURRENCY
+        
+        // you are currently on background thread
+        
+        // pass value of incoming arrary to local mutable array
+        
+        // jump on main thread (use either GCD or NSOperation) to reload collection
+    
+    }];
+    
+    
+    
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
    
     MovieCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    
+//    Movie *movie = self.localMutableArrayOfMovieObjects[indexPath.item];
+    
+    // create a background thread operation(queue)
+        // write statements to download image
+        // NSData... dataWithContents...
+        // NSURL...
+            // once you have image, jump on main queue and assign value to cell.cellImage.image
+    
+    
    
     cell.backgroundColor = [UIColor redColor];
    
@@ -63,6 +97,8 @@
     
 }
 
+
+
 //-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
 //    
 //
@@ -79,7 +115,7 @@
     if (kind == UICollectionElementKindSectionFooter) {
         ReloadDataFooterCollectionReusableView *footerview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter withReuseIdentifier:@"reuseIdentifier" forIndexPath:indexPath];
         
-        //footerview.delegate = self;
+        footerview.delegate = self;
         
         reusableview = footerview;
     }
@@ -87,12 +123,12 @@
     return reusableview;
 }
 
+// protocol method being implemented 
+-(void)buttonPressed:(UIButton *)button {
+    
+    NSLog(@"button pressed in collection view");
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
 }
-
 
 
 /*

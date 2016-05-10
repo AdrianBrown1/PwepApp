@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ReloadDataFooterCollectionReusableView.h"
+#import "OmdbAPi.h"
 
-@interface MainPageViewController : UIViewController <UISearchBarDelegate , UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface MainPageViewController : UIViewController <UISearchBarDelegate , UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ButtonDelegate>
 
 
 

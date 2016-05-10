@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AFNetworking.h"
+#import "Movie.h"
 
 @interface OmdbAPi : NSObject
 
+@property (nonatomic, strong) NSMutableArray *movieObjects; 
+
++(void)getMoviesForSelection:(NSString *)searchedMovieName WithCompletion:(void (^) (NSArray *movies)) completion;
 @end

@@ -8,6 +8,8 @@
 
 #import "ReloadDataFooterCollectionReusableView.h"
 
+
+
 @interface ReloadDataFooterCollectionReusableView ()
 
 
@@ -37,34 +39,25 @@
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem];
     [button setTitle:@"Load Stuff" forState:UIControlStateNormal];
-    [button.centerXAnchor constraintEqualToAnchor:self.centerXAnchor];
-    [button.centerYAnchor constraintEqualToAnchor:self.centerYAnchor];
-    [button sizeToFit];
-    [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
-    button.center = self.center;
+    [button addTarget:self action:@selector(viewButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     
     [self addSubview:button];
     
-    [self buttonPressed:button];
+    button.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [button.centerXAnchor constraintEqualToAnchor:self.centerXAnchor].active = YES;
+    [button.centerYAnchor constraintEqualToAnchor:self.centerYAnchor].active = YES;
     
 }
 
--(void)buttonPressed:(UIButton *)button {
+-(void)viewButtonPressed:(UIButton *)button {
     
-    // after button tapped
-    NSLog(@"Ive Been Tapped!!!");
-    
-    // ill have to write a protocol sending a message to the main age VC lettting it know the button was tapped.
-    
-    
+    if (self.delegate) {
+        [self.delegate buttonPressed:button];
+    }
     
 }
 
-//-(void)buttonPressed:(UIButton *)button {
-//    
-//    // use delegate property and call protocol method
-//    [self.delegate someMethod];
-//}
 
 @end

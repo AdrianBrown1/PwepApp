@@ -10,32 +10,57 @@
 
 @implementation OmdbAPi
 
+
+
 // NSoperation que
 // Image downloading collectionview operation
 
++(void)getMoviesForSelection:(NSString *)searchedMovieName WithCompletion:(void (^) (NSArray *movies)) completion {
+   
+    
+    NSString *newString = [searchedMovieName stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    
+    
+    searchedMovieName = [NSString stringWithFormat:@"s=star+wars&page=1"];
+   // NSString *urlString = [NSString stringWithFormat:@"http://www.omdbapi.com/?%@",searchedMovieName];
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://www.omdbapi.com/?s=star+wars&page=1"];
+    
+    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
+    
+    [sessionManager GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
 
+        NSMutableArray *movieObjects = [NSMutableArray new];
+        
+        NSMutableArray *movies = [NSMutableArray new];
+        
+        [movies addObject:responseObject];
+        
+        NSArray *moviesSorted = [movies valueForKey:@"Search"];
+        NSLog(@" Movies Sorted : %@",moviesSorted);
+        
+        
+        for (NSArray *singleMovie  in moviesSorted) {
+            
+            for (NSDictionary *reallySingleMovie in singleMovie) {
+                 Movie *movie = [[Movie alloc]initWithDictionary:reallySingleMovie];
+                 [movieObjects addObject:movie];
+            }
+            
+           
+        }
+        
+       NSLog(@"Array of movies: %@", movieObjects);
+        
+        
+        
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"Error : %@",error);
+    }];
+    
+    
 
--(void)urlStuff {
-    
-    NSString *baseUrl = @"http://www.omdbapi.com/?";
-    NSMutableString *userInput = [NSMutableString new];
-    
-    [userInput stringByAppendingString:@"mission"];
-    
-    NSString *url = [NSString stringWithFormat:@"%@s=%@",baseUrl,userInput];
-    
-    NSURL *URL = [NSURL URLWithString:url];
-    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-    
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
-                                            completionHandler:
-                                  ^(NSData *data, NSURLResponse *response, NSError *error) {
-                                      // ...
-                                  }];
-    
-    [task resume];
 }
-
 
 @end
