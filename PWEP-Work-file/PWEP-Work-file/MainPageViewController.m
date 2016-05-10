@@ -15,9 +15,9 @@
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) UISearchBar *sBar;
 @property (weak, nonatomic)UIButton *button;
+@property (nonatomic, strong)Movie *movie;
 
-
-@property (nonatomic, strong)NSArray *array; 
+@property (nonatomic, strong)NSMutableArray *MovieArray;
 @end
 
 @implementation MainPageViewController
@@ -40,12 +40,12 @@
     [self.view addSubview:self.collectionView];
     
     
-    // ask professor about this
     [self buttonPressed:self.button];
     
     NSString *starwars = [NSString stringWithFormat:@"s=star+wars&page=1"];
     
     [OmdbAPi getMoviesForSelection:starwars WithCompletion:^(NSArray *movies) {
+        
         
         // CONCURRENCY
         
