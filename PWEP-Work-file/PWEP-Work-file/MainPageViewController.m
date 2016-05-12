@@ -17,7 +17,6 @@
 @property (weak, nonatomic)UIButton *button;
 @property (nonatomic, strong)Movie *movie;
 
-@property (nonatomic, strong)NSMutableArray *MovieArray;
 @end
 
 @implementation MainPageViewController
@@ -50,6 +49,7 @@
         
         // Background work
         NSLog(@" currently in backround thread");
+        
 
         [OmdbAPi getMoviesForSelection:starwars WithCompletion:^(NSArray *movies) {
             
@@ -63,10 +63,9 @@
             
         }];
         
-        
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            // Main thread work (UI usually)
             
+            // Main thread work (UI usually)
             NSLog(@"back to main thread");
         }];
     }];
@@ -82,14 +81,22 @@
    
     MovieCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     
-//    Movie *movie = self.localMutableArrayOfMovieObjects[indexPath.item];
+
+    
+    
+    //    Movie *movie = self.localMutableArrayOfMovieObjects[indexPath.item];
     
     // create a background thread operation(queue)
+    NSOperationQueue *backgroundQueue = [NSOperationQueue new];
+   
         // write statements to download image
         // NSData... dataWithContents...
         // NSURL...
             // once you have image, jump on main queue and assign value to cell.cellImage.image
-    
+   
+//    self.movie = self.MovieArray[indexPath.item];
+//    cell.cellImage.image = [UIImage imageNamed:self.movie.poster];
+
     
    
     cell.backgroundColor = [UIColor redColor];
@@ -115,16 +122,6 @@
 }
 
 
-
-//-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-//    
-//
-//    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-//    
-////    return cell;
-//
-//}
-
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     
     UICollectionReusableView *reusableview = nil;
@@ -148,15 +145,6 @@
 }
 
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 
 @end

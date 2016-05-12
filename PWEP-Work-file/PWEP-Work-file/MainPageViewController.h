@@ -12,6 +12,7 @@
 
 @interface MainPageViewController : UIViewController <UISearchBarDelegate , UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, ButtonDelegate>
 
+@property (nonatomic, strong)NSMutableArray *MovieArray;
 
 
 

@@ -17,10 +17,8 @@
 // Image downloading collectionview operation
 
 +(void)getMoviesForSelection:(NSString *)searchedMovieName WithCompletion:(void (^) (NSArray *movies)) completion {
-   
     
     NSString *newString = [searchedMovieName stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-    
     
     searchedMovieName = [NSString stringWithFormat:@"s=star+wars&page=1"];
    // NSString *urlString = [NSString stringWithFormat:@"http://www.omdbapi.com/?%@",searchedMovieName];
@@ -37,9 +35,7 @@
         
         [movies addObject:responseObject];
         
-        NSArray *moviesSorted = [movies valueForKey:@"Search"];
-      //  NSLog(@" Movies Sorted : %@",moviesSorted);
-        
+        NSArray *moviesSorted = [movies valueForKey:@"Search"];        
         
         for (NSArray *singleMovie  in moviesSorted) {
             
@@ -47,11 +43,10 @@
                  Movie *movie = [[Movie alloc]initWithDictionary:reallySingleMovie];
                  [movieObjects addObject:movie];
             }
-            
-           
         }
         
        NSLog(@"Array of movies: %@", movieObjects);
+        
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"Error : %@",error);
