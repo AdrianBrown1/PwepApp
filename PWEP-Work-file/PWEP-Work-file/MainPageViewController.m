@@ -44,18 +44,35 @@
     
     NSString *starwars = [NSString stringWithFormat:@"s=star+wars&page=1"];
     
-    [OmdbAPi getMoviesForSelection:starwars WithCompletion:^(NSArray *movies) {
-        
-        
-        // CONCURRENCY
-        
-        // you are currently on background thread
-        
-        // pass value of incoming arrary to local mutable array
-        
-        // jump on main thread (use either GCD or NSOperation) to reload collection
     
+    NSOperationQueue *myQueue = [[NSOperationQueue alloc] init];
+    [myQueue addOperationWithBlock:^{
+        
+        // Background work
+        NSLog(@" currently in backround thread");
+
+        [OmdbAPi getMoviesForSelection:starwars WithCompletion:^(NSArray *movies) {
+            
+            // CONCURRENCY
+            
+            // you are currently on background thread
+            
+            // pass value of incoming arrary to local mutable array
+            
+            // jump on main thread (use either GCD or NSOperation) to reload collection
+            
+        }];
+        
+        
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            // Main thread work (UI usually)
+            
+            NSLog(@"back to main thread");
+        }];
     }];
+    
+    
+    
     
     
     

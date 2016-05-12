@@ -7,6 +7,7 @@
 //
 
 #import "OmdbAPi.h"
+#import "MainPageViewController.h"
 
 @implementation OmdbAPi
 
@@ -37,7 +38,7 @@
         [movies addObject:responseObject];
         
         NSArray *moviesSorted = [movies valueForKey:@"Search"];
-        NSLog(@" Movies Sorted : %@",moviesSorted);
+      //  NSLog(@" Movies Sorted : %@",moviesSorted);
         
         
         for (NSArray *singleMovie  in moviesSorted) {
@@ -52,13 +53,9 @@
         
        NSLog(@"Array of movies: %@", movieObjects);
         
-        
-        
-        
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"Error : %@",error);
     }];
-    
     
 
 }
