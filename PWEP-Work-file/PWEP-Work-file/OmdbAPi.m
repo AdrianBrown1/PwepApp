@@ -46,11 +46,14 @@
         }
         
        NSLog(@"Array of movies: %@", movieObjects);
-        
+    
+        completion(movieObjects); 
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"Error : %@",error);
     }];
+    
+    
     
 
 }

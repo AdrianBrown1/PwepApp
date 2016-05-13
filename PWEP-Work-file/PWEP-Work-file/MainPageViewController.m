@@ -23,7 +23,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    self.MovieArray = [NSMutableArray new];
     //Search Bar
     self.sBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0,10,self.navigationController.navigationBar.bounds.size.width,self.navigationController.navigationBar.bounds.size.height/2)];
    
@@ -43,81 +44,114 @@
     
     NSString *starwars = [NSString stringWithFormat:@"s=star+wars&page=1"];
     
-    
-    NSOperationQueue *myQueue = [[NSOperationQueue alloc] init];
-    [myQueue addOperationWithBlock:^{
-        
-        // Background work
-        NSLog(@" currently in backround thread");
-        
-
-        [OmdbAPi getMoviesForSelection:starwars WithCompletion:^(NSArray *movies) {
-            
-            // CONCURRENCY
-            
-            // you are currently on background thread
-            
-            // pass value of incoming arrary to local mutable array
-            
-            // jump on main thread (use either GCD or NSOperation) to reload collection
-            
-        }];
+    [OmdbAPi getMoviesForSelection:starwars WithCompletion:^(NSArray *movies) {
         
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             
-            // Main thread work (UI usually)
-            NSLog(@"back to main thread");
+            NSLog(@"on main thread");
+            NSLog(@" Movies not in array %@",movies);
+            
+            [self.MovieArray addObjectsFromArray:movies];
+            NSLog(@"Movies ARE NOW IN ARRAY ! %@", self.MovieArray);
+            
+            [self.collectionView reloadData];
+
         }];
+        
     }];
     
-    
-    
-    
-    
-    
+    NSLog(@" data was reloaded ! %@",self.MovieArray);
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
    
-    MovieCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-    
-
+   
     
     
-    //    Movie *movie = self.localMutableArrayOfMovieObjects[indexPath.item];
+    NSLog(@"cell for item at index path: %li",indexPath.item);
     
-    // create a background thread operation(queue)
+   MovieCollectionViewCell *movieCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    
+    
+    
+        // once you have image, jump on main queue and assign value to cell.cellImage.image
+    
     NSOperationQueue *backgroundQueue = [NSOperationQueue new];
-   
-        // write statements to download image
-        // NSData... dataWithContents...
-        // NSURL...
-            // once you have image, jump on main queue and assign value to cell.cellImage.image
-   
-//    self.movie = self.MovieArray[indexPath.item];
-//    cell.cellImage.image = [UIImage imageNamed:self.movie.poster];
-
     
-   
-    cell.backgroundColor = [UIColor redColor];
-   
-    cell.cellImage.image = [UIImage imageNamed:@"jeremy.jpg"];
+    [backgroundQueue addOperationWithBlock:^{
+        
+        
+            // write statements to download image
+            // NSData... dataWithContents...
+            // NSURL...
+        
+            
+        Movie *singleMovie = self.MovieArray[indexPath.row];
+        
+        NSLog(@" here it is ! %@",[singleMovie valueForKey:@"poster"]);
+        
+//            NSURL *url = [NSURL URLWithString:singleMovie.poster];
+//            
+//            NSData *data = [NSData dataWithContentsOfURL:url];
+//            
+//            UIImage *posterImage = [UIImage imageWithData:data];
+//            
+//            movieCell.cellImage.image = posterImage;
+        
+        
+        
+        
+        }];
     
     
-
     
-    
-    return cell;
+     movieCell.backgroundColor = [UIColor redColor];
+//   
+//    cell.cellImage.image = [UIImage imageNamed:@"jeremy.jpg"];
+  
+    return movieCell;
 }
 
+//-(void)collectionView:(UICollectionView *)collectionView
+//      willDisplayCell:(UICollectionViewCell *)cell
+//   forItemAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//    MovieCollectionViewCell *movieCell = (MovieCollectionViewCell *)cell;
+//    
+//    // SET UP CELL PROPERTIES
+//    
+//    NSOperationQueue *backgroundQueue = [NSOperationQueue new];
+//    
+//    [backgroundQueue addOperationWithBlock:^{
+//
+//        // write statements to download image
+//        // NSData... dataWithContents...
+//        // NSURL...
+//        
+//        NSURL *url = [NSURL URLWithString:self.movie.poster];
+//        NSLog(@" what is a movie ? %@",self.movie.poster);
+//        
+//        NSData *data = [NSData dataWithContentsOfURL:url];
+//        
+//        UIImage *posterImage = [UIImage imageWithData:data];
+//        movieCell.cellImage.image = posterImage;
+//        
+//    }];
+//    
+//    [self.collectionView reloadData];
+//}
+
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 10;
+    NSLog(@" count %lu",self.MovieArray.count); 
+    return self.MovieArray.count;
 }
 
 
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"Index path %@",indexPath);
+    
+    
     
 }
 
