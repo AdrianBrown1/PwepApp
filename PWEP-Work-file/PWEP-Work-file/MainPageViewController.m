@@ -60,26 +60,18 @@
         
     }];
     
-    NSLog(@" data was reloaded ! %@",self.MovieArray);
+//    NSLog(@" data was reloaded ! %@",self.MovieArray);
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
    
-   
-    
-    
-    NSLog(@"cell for item at index path: %li",indexPath.item);
-    
    MovieCollectionViewCell *movieCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-    
-    
     
         // once you have image, jump on main queue and assign value to cell.cellImage.image
     
     NSOperationQueue *backgroundQueue = [NSOperationQueue new];
     
     [backgroundQueue addOperationWithBlock:^{
-        
         
             // write statements to download image
             // NSData... dataWithContents...
@@ -88,27 +80,22 @@
             
         Movie *singleMovie = self.MovieArray[indexPath.row];
         
-        NSLog(@" here it is ! %@",[singleMovie valueForKey:@"poster"]);
-        
-//            NSURL *url = [NSURL URLWithString:singleMovie.poster];
-//            
-//            NSData *data = [NSData dataWithContentsOfURL:url];
-//            
-//            UIImage *posterImage = [UIImage imageWithData:data];
-//            
-//            movieCell.cellImage.image = posterImage;
-        
-        
-        
+            NSURL *url = [NSURL URLWithString:singleMovie.poster];
+            
+            NSData *data = [NSData dataWithContentsOfURL:url];
+            
+            UIImage *posterImage = [UIImage imageWithData:data];
+            
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            
+             movieCell.cellImage.image = posterImage;
+
         
         }];
-    
-    
-    
-     movieCell.backgroundColor = [UIColor redColor];
-//   
-//    cell.cellImage.image = [UIImage imageNamed:@"jeremy.jpg"];
-  
+        
+        
+    }];
+
     return movieCell;
 }
 
@@ -142,7 +129,6 @@
 //}
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    NSLog(@" count %lu",self.MovieArray.count); 
     return self.MovieArray.count;
 }
 
@@ -150,9 +136,7 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"Index path %@",indexPath);
-    
-    
-    
+    // WHAT DO I NEED THIS METHOD FOR ??
 }
 
 
@@ -177,8 +161,6 @@
     NSLog(@"button pressed in collection view");
 
 }
-
-
 
 
 @end
