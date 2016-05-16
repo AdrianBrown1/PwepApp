@@ -28,8 +28,6 @@
     AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
     
     [sessionManager GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-
-        
         
         NSArray *moviesSorted = [responseObject valueForKey:@"Search"];
         
@@ -39,44 +37,11 @@
             
             
             Movie *movie = [[Movie alloc]initWithDictionary:singleMovie];
-            NSLog(@"What is a movie ?? %@ === ", movie); 
             [movieObjects addObject:movie];
             
         }
      
-//        NSMutableArray *movieObjects = [NSMutableArray new];
-//        
-//        NSMutableArray *movies = [NSMutableArray new];
-//        
-//        [movies addObject:responseObject];
-//        
-//        NSArray *moviesSorted = [movies valueForKey:@"Search"];        
-//        
-//
-//        for (NSDictionary *singleMovie  in moviesSorted) {
-//            
-//            
-//            Movie *movie = [[Movie alloc]initWithDictionary:singleMovie];
-//            NSLog(@" what is this now?  %@",movie);
-//            
-//            [movieObjects addObject:movie];
-//            
-//            
-//        }
-        
-      //for (NSArray *singleMovie  in moviesSorted) {
-//            
-//            for (NSDictionary *reallySingleMovie in singleMovie) {
-//                 Movie *movie = [[Movie alloc]initWithDictionary:reallySingleMovie];
-//                
-//                NSLog(@" Movie is here %@", [movie.poster valueForKeyPath:@"Poster"]);
-//                
-//                // NSLog(@"what is a single movie ?? %@",[reallySingleMovie valueForKey:@"Poster"]);
-//                
-//                 [movieObjects addObject:movie];
-//            }
-//        }
-        
+
         completion(movieObjects); 
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

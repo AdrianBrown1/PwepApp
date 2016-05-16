@@ -30,9 +30,7 @@
    
     self.sBar.delegate = self;
     self.navigationItem.titleView = self.sBar;
-    
-    	//[self.navigationController.navigationBar addSubview:self.sBar];
-    
+        
     
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
@@ -48,12 +46,8 @@
         
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             
-            NSLog(@"on main thread");
-            NSLog(@" Movies not in array %@",movies);
-            
             [self.MovieArray addObjectsFromArray:movies];
-            NSLog(@"Movies ARE NOW IN ARRAY ! %@", self.MovieArray);
-            
+
             [self.collectionView reloadData];
 
         }];
@@ -135,8 +129,11 @@
 
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"Index path %@",indexPath);
-    // WHAT DO I NEED THIS METHOD FOR ??
+
+    
+    Movie *movieTapped = self.MovieArray[indexPath.row];
+    NSLog(@"This is the movie Tapped! %@",movieTapped.title);
+
 }
 
 
