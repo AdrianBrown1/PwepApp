@@ -14,10 +14,15 @@
     self = [super init];
     if (self) {
         _title = [dictionary valueForKey:@"Title"];
-        _year = [dictionary valueForKey:@"Year"];
         _type = [dictionary valueForKey:@"Type"];
-        _omdbID = [dictionary valueForKey:@"omdbID"];
-        _poster = [dictionary valueForKey:@"Poster"]; 
+        _omdbID = [dictionary valueForKey:@"imdbID"];
+        _poster = [dictionary valueForKey:@"Poster"];
+        
+        _year = [dictionary valueForKey:@"Year"];
+        _director = [dictionary valueForKey:@"Director"];
+        _writer = [dictionary valueForKey:@"Writer"];
+        _stars = [dictionary valueForKey:@"Actors"];
+        _imdbScore = [dictionary valueForKey:@"imdbRating"];
     }
     return self;
 }

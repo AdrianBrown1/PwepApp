@@ -12,7 +12,10 @@
 
 @interface OmdbAPi : NSObject
 
-@property (nonatomic, strong) NSMutableArray *movieObjects; 
+@property (nonatomic, strong) NSMutableArray *movieObjects;
+@property (nonatomic,strong) Movie *movieSelected;
 
 +(void)getMoviesForSelection:(NSString *)searchedMovieName WithCompletion:(void (^) (NSArray *movies)) completion;
++(void)getMovieForSelection:(NSString *)movieID withCompletion:(void (^) (Movie *movie))completion;
+
 @end

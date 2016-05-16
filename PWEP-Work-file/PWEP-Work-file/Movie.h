@@ -19,6 +19,7 @@
 @property (nonatomic,strong)NSString *director;
 @property (nonatomic,strong)NSString *writer;
 @property (nonatomic,strong)NSString *stars;
+@property (nonatomic,strong)NSString *imdbScore;
 
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;

@@ -10,13 +10,14 @@
 #import "ReloadDataFooterCollectionReusableView.h"
 #import "MovieCollectionViewCell.h"
 #import "Movie.h"
+#import "SelectedMovieViewController.h"
 
 @interface MainPageViewController ()
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) UISearchBar *sBar;
 @property (weak, nonatomic)UIButton *button;
 @property (nonatomic, strong)Movie *movie;
-
+@property (nonatomic) NSIndexPath *indexPath;
 @end
 
 @implementation MainPageViewController
@@ -53,6 +54,7 @@
         }];
         
     }];
+    NSLog(@" WHAT IS THE INDEX PATH ! %@",self.indexPath);
     
 //    NSLog(@" data was reloaded ! %@",self.MovieArray);
 }
@@ -129,13 +131,31 @@
 
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-
     
-    Movie *movieTapped = self.MovieArray[indexPath.row];
-    NSLog(@"This is the movie Tapped! %@",movieTapped.title);
-
+    self.indexPath = [NSIndexPath indexPathWithIndex:indexPath.row];
+    NSLog(@" This is the new index path ! %@", self.indexPath);
 }
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"MovieSelectedSegue"])
+    {
+        Movie *movieTapped = [self.MovieArray objectAtIndex:self.indexPath.row];
+        NSLog(@"movie tapped id %@",movieTapped.omdbID);
+        
+       [OmdbAPi getMovieForSelection:movieTapped.omdbID withCompletion:^(Movie *movie) {
+           //
+       }];
+        
+        SelectedMovieViewController *destinationVC = [segue destinationViewController];
+        
+        NSLog(@"Movie tapped %@",movieTapped);
+        
+        destinationVC.directorLabel.text = movieTapped.director;
+        NSLog(@"director label %@",destinationVC.directorLabel.text);
 
+    }
+}
 
 -(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     

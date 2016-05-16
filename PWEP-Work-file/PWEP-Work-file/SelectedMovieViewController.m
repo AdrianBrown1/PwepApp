@@ -7,8 +7,9 @@
 //
 
 #import "SelectedMovieViewController.h"
-
+#import "MainPageViewController.h"
 @interface SelectedMovieViewController ()
+
 
 @end
 
@@ -22,6 +23,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)FullPlotButtonTapped:(id)sender {
+    
+    
 }
 
 /*

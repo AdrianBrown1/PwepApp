@@ -187,6 +187,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2KA-IE-Rwj">
                                 <rect key="frame" x="30" y="509" width="210" height="33"/>
                                 <state key="normal" title="Full Plot Description "/>
+                                <connections>
+                                    <action selector="FullPlotButtonTapped:" destination="fRt-hO-ry3" eventType="touchUpInside" id="Zy8-ZL-oQw"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -213,6 +216,15 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="DO2-LH-vxC"/>
+                    <connections>
+                        <outlet property="directorLabel" destination="jiG-db-nBZ" id="3w7-rP-hxJ"/>
+                        <outlet property="imdbScoreLabel" destination="FTS-VB-EHK" id="WNq-KN-xJ5"/>
+                        <outlet property="movieImage" destination="LlR-P2-tev" id="WGH-wf-Stc"/>
+                        <outlet property="movieTextView" destination="VK2-N9-nwn" id="1Gv-K5-7yC"/>
+                        <outlet property="releasedLabel" destination="NjE-ql-lEm" id="rfK-BV-8An"/>
+                        <outlet property="starsLabel" destination="oLX-VP-x03" id="EBU-gj-kiU"/>
+                        <outlet property="writerLabel" destination="Css-p3-nUt" id="WXl-KJ-Scc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nIP-22-ZNh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

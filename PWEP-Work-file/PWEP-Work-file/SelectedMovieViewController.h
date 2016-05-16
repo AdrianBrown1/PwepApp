@@ -9,5 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface SelectedMovieViewController : UIViewController
-
+@property (weak, nonatomic) IBOutlet UIImageView *movieImage;
+@property (weak, nonatomic) IBOutlet UITextView *movieTextView;
+@property (weak, nonatomic) IBOutlet UILabel *releasedLabel;
+@property (weak, nonatomic) IBOutlet UILabel *directorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *writerLabel;
+@property (weak, nonatomic) IBOutlet UILabel *starsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *imdbScoreLabel;
 @end
