@@ -8,6 +8,8 @@
 
 #import "SelectedMovieViewController.h"
 #import "MainPageViewController.h"
+#import "OmdbAPi.h"
+#import "MovieDecsriptionViewController.h"
 @interface SelectedMovieViewController ()
 
 
@@ -17,7 +19,36 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    
+           [OmdbAPi getMovieForSelection:self.imdbID withCompletion:^(Movie *movie) {
+    
+               self.directorLabel.text = [NSString stringWithFormat:@"Director: %@",movie.director];
+               self.writerLabel.text = [NSString stringWithFormat:@"Writer: %@",movie.writer];
+               self.starsLabel.text  = [NSString stringWithFormat:@"Actors: %@ \n",movie.stars];
+               self.releasedLabel.text = [NSString stringWithFormat:@"Released: %@",movie.year];
+               self.imdbScoreLabel.text = [NSString stringWithFormat:@"IMDB Score: %@",movie.imdbScore];
+               self.movieTextView.text = movie.plot;
+    
+    
+               NSOperationQueue *backgroundQueue = [NSOperationQueue new];
+    
+               [backgroundQueue addOperationWithBlock:^{
+    
+                   NSURL *url = [NSURL URLWithString:movie.poster];
+    
+                   NSData *data = [NSData dataWithContentsOfURL:url];
+    
+                   UIImage *posterImage = [UIImage imageWithData:data];
+    
+                   [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                       self.movieImage.image = posterImage;
+                       
+                   }];
+                }];
+           }];
+
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -27,17 +58,19 @@
 
 - (IBAction)FullPlotButtonTapped:(id)sender {
     
+    NSLog(@" Ive been tapped!");
     
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    
+    if ([[segue identifier] isEqualToString:@"plotSegue"])
+    {
+        MovieDecsriptionViewController *destinationVC = [segue destinationViewController];
+        destinationVC.imdbID = self.imdbID;
+    }
+
 }
-*/
+
 
 @end

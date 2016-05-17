@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface MovieDecsriptionViewController : UIViewController
+@property (weak, nonatomic) NSString *imdbID;
 
 @end

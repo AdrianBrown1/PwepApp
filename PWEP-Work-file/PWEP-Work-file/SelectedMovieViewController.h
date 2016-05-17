@@ -16,4 +16,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *writerLabel;
 @property (weak, nonatomic) IBOutlet UILabel *starsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *imdbScoreLabel;
+@property (strong, nonatomic) NSString *imdbID; 
 @end

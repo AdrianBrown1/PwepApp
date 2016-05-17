@@ -18,4 +18,6 @@
 +(void)getMoviesForSelection:(NSString *)searchedMovieName WithCompletion:(void (^) (NSArray *movies)) completion;
 +(void)getMovieForSelection:(NSString *)movieID withCompletion:(void (^) (Movie *movie))completion;
 
++(void)getPlotSelection:(NSString *)movieID withCompletion:(void (^) (Movie *movie))completion;
+
 @end
