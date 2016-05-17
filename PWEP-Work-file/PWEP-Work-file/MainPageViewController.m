@@ -54,9 +54,8 @@
         }];
         
     }];
-    NSLog(@" WHAT IS THE INDEX PATH ! %@",self.indexPath);
     
-//    NSLog(@" data was reloaded ! %@",self.MovieArray);
+    
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -132,8 +131,8 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    self.indexPath = [NSIndexPath indexPathWithIndex:indexPath.row];
-    NSLog(@" This is the new index path ! %@", self.indexPath);
+    self.indexPath = [[NSIndexPath alloc]initWithIndex:indexPath.row];
+    
 }
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
@@ -141,19 +140,38 @@
     if ([[segue identifier] isEqualToString:@"MovieSelectedSegue"])
     {
         Movie *movieTapped = [self.MovieArray objectAtIndex:self.indexPath.row];
-        NSLog(@"movie tapped id %@",movieTapped.omdbID);
+        NSLog(@"movie tapped id %@",movieTapped);
+        
+        
         
        [OmdbAPi getMovieForSelection:movieTapped.omdbID withCompletion:^(Movie *movie) {
-           //
+           
+           SelectedMovieViewController *destinationVC = [segue destinationViewController];
+           destinationVC.directorLabel.text = [NSString stringWithFormat:@"Director: %@",movie.director];
+           destinationVC.writerLabel.text = [NSString stringWithFormat:@"Writer: %@",movie.writer];
+           destinationVC.starsLabel.text  = [NSString stringWithFormat:@"Actors: %@",movie.stars];
+           destinationVC.releasedLabel.text = [NSString stringWithFormat:@"Released: %@",movie.year];
+           destinationVC.imdbScoreLabel.text = [NSString stringWithFormat:@"IMDB Score: %@",movie.imdbScore]; 
+           destinationVC.movieTextView.text = movie.plot;
+           
+           
+           NSOperationQueue *backgroundQueue = [NSOperationQueue new];
+           
+           [backgroundQueue addOperationWithBlock:^{
+               
+               NSURL *url = [NSURL URLWithString:movie.poster];
+               
+               NSData *data = [NSData dataWithContentsOfURL:url];
+               
+               UIImage *posterImage = [UIImage imageWithData:data];
+               
+               [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                   destinationVC.movieImage.image = posterImage;
+                   
+               }];
+            }];
        }];
         
-        SelectedMovieViewController *destinationVC = [segue destinationViewController];
-        
-        NSLog(@"Movie tapped %@",movieTapped);
-        
-        destinationVC.directorLabel.text = movieTapped.director;
-        NSLog(@"director label %@",destinationVC.directorLabel.text);
-
     }
 }
 
@@ -175,7 +193,9 @@
 // protocol method being implemented 
 -(void)buttonPressed:(UIButton *)button {
     
-    NSLog(@"button pressed in collection view");
+
+    NSLog(@" I have been tapped !");
+    
 
 }
 

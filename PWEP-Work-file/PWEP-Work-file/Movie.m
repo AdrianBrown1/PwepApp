@@ -23,6 +23,7 @@
         _writer = [dictionary valueForKey:@"Writer"];
         _stars = [dictionary valueForKey:@"Actors"];
         _imdbScore = [dictionary valueForKey:@"imdbRating"];
+        _plot = [dictionary valueForKey:@"Plot"]; 
     }
     return self;
 }

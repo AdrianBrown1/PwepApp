@@ -20,7 +20,7 @@
 @property (nonatomic,strong)NSString *writer;
 @property (nonatomic,strong)NSString *stars;
 @property (nonatomic,strong)NSString *imdbScore;
-
+@property (nonnull,strong) NSString *plot;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
