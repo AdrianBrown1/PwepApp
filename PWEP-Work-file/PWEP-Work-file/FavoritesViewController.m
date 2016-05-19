@@ -7,36 +7,44 @@
 //
 
 #import "FavoritesViewController.h"
-
+#import "FavoriteMoviesDataStore.h"
 @interface FavoritesViewController ()
-
+@property (nonatomic, strong)NSMutableArray *allMovies;
 @end
 
 @implementation FavoritesViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.allMovies = [NSMutableArray new];
+
+    NSFetchRequest *allItemsRequest = [NSFetchRequest fetchRequestWithEntityName:@"MovieModel"];
+    
+    FavoriteMoviesDataStore *dataStore = [FavoriteMoviesDataStore sharedDataStore];
+    
+   NSArray *allItems = [dataStore.managedObjectContext executeFetchRequest:allItemsRequest error:nil];
+    
+    [self.allMovies addObjectsFromArray:allItems];
+    
+    
+
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
-    
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [[UITableViewCell alloc]init];
-    
-    return cell;
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 5;
 }
 
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"favoriteMovieCell" forIndexPath:indexPath];
+    
+    return cell; 
+}
 
 
 

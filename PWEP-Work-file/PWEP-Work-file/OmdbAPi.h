@@ -8,8 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
-#import "Movie.h"
-
+#import "Movie+CoreDataProperties.h"
 @interface OmdbAPi : NSObject
 
 @property (nonatomic, strong) NSMutableArray *movieObjects;

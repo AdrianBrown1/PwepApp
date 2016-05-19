@@ -169,7 +169,12 @@
 -(void)buttonPressed:(UIButton *)button {
     NSLog(@" Ive been tapped !"); 
 
-    NSString *starwars = [NSString stringWithFormat:@"s=star+wars&page=2"];
+    
+    NSUInteger number = 1;
+    
+    NSString *starwars = [NSString stringWithFormat:@"s=star+wars&page=%lu",number + 1];
+    
+    NSLog(@" What page am i on %@", starwars);
     
     [OmdbAPi getMoviesForSelection:starwars WithCompletion:^(NSArray *movies) {
         

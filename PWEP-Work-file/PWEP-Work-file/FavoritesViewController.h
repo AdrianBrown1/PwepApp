@@ -8,14 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FavoritesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface FavoritesViewController : UITableViewController
 
 
-@property (weak, nonatomic) IBOutlet UIImageView *movieImage;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UILabel *directorLabel;
-@property (weak, nonatomic) IBOutlet UILabel *writerLabel;
-@property (weak, nonatomic) IBOutlet UILabel *starsLabel;
 
 
 @end

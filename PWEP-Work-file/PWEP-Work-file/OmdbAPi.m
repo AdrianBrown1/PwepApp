@@ -8,6 +8,7 @@
 
 #import "OmdbAPi.h"
 #import "MainPageViewController.h"
+#import "FavoriteMoviesDataStore.h"
 
 @implementation OmdbAPi
 
@@ -35,7 +36,23 @@
         
         for (NSDictionary *singleMovie  in moviesSorted) {
             
-            Movie *movie = [[Movie alloc]initWithDictionary:singleMovie];
+            // Movie *movie = [[Movie alloc]initWithDictionary:singleMovie];
+
+            FavoriteMoviesDataStore *dataStore = [FavoriteMoviesDataStore sharedDataStore];
+            Movie *movie = [NSEntityDescription insertNewObjectForEntityForName:@"Movie" inManagedObjectContext:dataStore.managedObjectContext];
+            
+            movie.title = [singleMovie valueForKey:@"Title"];
+            movie.type = [singleMovie valueForKey:@"Type"];
+            movie.omdbID = [singleMovie valueForKey:@"imdbID"];
+            movie.poster = [singleMovie valueForKey:@"Poster"];
+            
+            movie.year = [singleMovie valueForKey:@"Year"];
+            movie.director = [singleMovie valueForKey:@"Director"];
+            movie.writer = [singleMovie valueForKey:@"Writer"];
+            movie.stars = [singleMovie valueForKey:@"Actors"];
+            movie.imdbScore = [singleMovie valueForKey:@"imdbRating"];
+            movie.plot = [singleMovie valueForKey:@"Plot"];
+            
             [movieObjects addObject:movie];
             
         }
@@ -58,12 +75,26 @@
         
         NSArray *moviesSorted = [NSArray arrayWithObject:responseObject];
         
-        Movie *movieTapped = [[Movie alloc]init];
+        FavoriteMoviesDataStore *dataStore = [FavoriteMoviesDataStore sharedDataStore];
+        Movie *movieTapped = [NSEntityDescription insertNewObjectForEntityForName:@"Movie" inManagedObjectContext:dataStore.managedObjectContext];
         
         for (NSDictionary *singleMovie in moviesSorted) {
-            movieTapped = [movieTapped initWithDictionary:singleMovie];
-            NSLog(@"Movie Tapped %@",movieTapped);
+            FavoriteMoviesDataStore *dataStore = [FavoriteMoviesDataStore sharedDataStore];
+            Movie *movie = [NSEntityDescription insertNewObjectForEntityForName:@"Movie" inManagedObjectContext:dataStore.managedObjectContext];
             
+            movie.title = [singleMovie valueForKey:@"Title"];
+            movie.type = [singleMovie valueForKey:@"Type"];
+            movie.omdbID = [singleMovie valueForKey:@"imdbID"];
+            movie.poster = [singleMovie valueForKey:@"Poster"];
+            
+            movie.year = [singleMovie valueForKey:@"Year"];
+            movie.director = [singleMovie valueForKey:@"Director"];
+            movie.writer = [singleMovie valueForKey:@"Writer"];
+            movie.stars = [singleMovie valueForKey:@"Actors"];
+            movie.imdbScore = [singleMovie valueForKey:@"imdbRating"];
+            movie.plot = [singleMovie valueForKey:@"Plot"];
+            
+            movieTapped = movie;
             
         }
        completion(movieTapped);
@@ -89,15 +120,30 @@
         
         NSArray *moviesSorted = [NSArray arrayWithObject:responseObject];
         
-        Movie *movieTapped = [[Movie alloc]init];
+        FavoriteMoviesDataStore *dataStore = [FavoriteMoviesDataStore sharedDataStore];
+        Movie *movieTapped = [NSEntityDescription insertNewObjectForEntityForName:@"Movie" inManagedObjectContext:dataStore.managedObjectContext];
         
         for (NSDictionary *singleMovie in moviesSorted) {
-            movieTapped = [movieTapped initWithDictionary:singleMovie];
-            NSLog(@"Movie Tapped %@",movieTapped);
+            FavoriteMoviesDataStore *dataStore = [FavoriteMoviesDataStore sharedDataStore];
+            Movie *movie = [NSEntityDescription insertNewObjectForEntityForName:@"Movie" inManagedObjectContext:dataStore.managedObjectContext];
             
+            movie.title = [singleMovie valueForKey:@"Title"];
+            movie.type = [singleMovie valueForKey:@"Type"];
+            movie.omdbID = [singleMovie valueForKey:@"imdbID"];
+            movie.poster = [singleMovie valueForKey:@"Poster"];
+            
+            movie.year = [singleMovie valueForKey:@"Year"];
+            movie.director = [singleMovie valueForKey:@"Director"];
+            movie.writer = [singleMovie valueForKey:@"Writer"];
+            movie.stars = [singleMovie valueForKey:@"Actors"];
+            movie.imdbScore = [singleMovie valueForKey:@"imdbRating"];
+            movie.plot = [singleMovie valueForKey:@"Plot"];
+            
+            movieTapped = movie;
             
         }
         completion(movieTapped);
+
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
