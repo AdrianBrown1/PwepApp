@@ -9,6 +9,15 @@
 #import "FavoritesDescriptionViewController.h"
 
 @interface FavoritesDescriptionViewController ()
+@property (weak, nonatomic) IBOutlet UIView *blurBackGroundView;
+@property (weak, nonatomic) IBOutlet UIView *posterImage;
+@property (weak, nonatomic) IBOutlet UITextView *plotText;
+@property (weak, nonatomic) IBOutlet UIStackView *releasedLabel;
+@property (weak, nonatomic) IBOutlet UILabel *directorLabel;
+@property (weak, nonatomic) IBOutlet UILabel *writerLabel;
+@property (weak, nonatomic) IBOutlet UILabel *starsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *imdbScoreLabel;
+
 
 @end
 

@@ -15,7 +15,6 @@
 		0A8C381C1CD2B55D00A42B6B /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8C381B1CD2B55D00A42B6B /* MainPageViewController.m */; };
 		0A8C381F1CD2B5E700A42B6B /* SelectedMovieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8C381E1CD2B5E700A42B6B /* SelectedMovieViewController.m */; };
 		0A8C38221CD2B61E00A42B6B /* MovieDecsriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8C38211CD2B61E00A42B6B /* MovieDecsriptionViewController.m */; };
-		0A8C38251CD2BD5C00A42B6B /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8C38241CD2BD5C00A42B6B /* FavoritesViewController.m */; };
 		0A8C38281CD5626600A42B6B /* FavoritesDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8C38271CD5626600A42B6B /* FavoritesDescriptionViewController.m */; };
 		0A8C382B1CD562C400A42B6B /* FavoritesPlotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8C382A1CD562C400A42B6B /* FavoritesPlotViewController.m */; };
 		0A8C382E1CD7E65600A42B6B /* MovieCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8C382D1CD7E65600A42B6B /* MovieCollectionViewCell.m */; };
@@ -26,6 +25,9 @@
 		0AF4981F1CECEC9A002D98F2 /* Movie+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF4981C1CECEC9A002D98F2 /* Movie+CoreDataProperties.m */; };
 		0AF498231CED0095002D98F2 /* FavoriteMoviesDataStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF498221CED0095002D98F2 /* FavoriteMoviesDataStore.m */; };
 		0AF498251CEE13AA002D98F2 /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF498241CEE13AA002D98F2 /* Movie.m */; };
+		0AF498281CEE9B00002D98F2 /* FavoriteMovieTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AF498271CEE9B00002D98F2 /* FavoriteMovieTableViewController.m */; };
+		0AF4982A1CEEBF96002D98F2 /* noun_156706_cc.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AF498291CEEBF96002D98F2 /* noun_156706_cc.png */; };
+		0AF4982C1CEEC040002D98F2 /* noun_338176_cc.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AF4982B1CEEC040002D98F2 /* noun_338176_cc.png */; };
 		2580CEE010DD36670DD2D8AB /* libPods-PWEP-Work-file.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DCFBCC95F4EB5E307A3D1FF8 /* libPods-PWEP-Work-file.a */; };
 /* End PBXBuildFile section */
 
@@ -44,8 +46,6 @@
 		0A8C381E1CD2B5E700A42B6B /* SelectedMovieViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectedMovieViewController.m; sourceTree = "<group>"; };
 		0A8C38201CD2B61E00A42B6B /* MovieDecsriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieDecsriptionViewController.h; sourceTree = "<group>"; };
 		0A8C38211CD2B61E00A42B6B /* MovieDecsriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieDecsriptionViewController.m; sourceTree = "<group>"; };
-		0A8C38231CD2BD5C00A42B6B /* FavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesViewController.h; sourceTree = "<group>"; };
-		0A8C38241CD2BD5C00A42B6B /* FavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesViewController.m; sourceTree = "<group>"; };
 		0A8C38261CD5626600A42B6B /* FavoritesDescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesDescriptionViewController.h; sourceTree = "<group>"; };
 		0A8C38271CD5626600A42B6B /* FavoritesDescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesDescriptionViewController.m; sourceTree = "<group>"; };
 		0A8C38291CD562C400A42B6B /* FavoritesPlotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesPlotViewController.h; sourceTree = "<group>"; };
@@ -64,6 +64,10 @@
 		0AF498211CED0095002D98F2 /* FavoriteMoviesDataStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteMoviesDataStore.h; sourceTree = "<group>"; };
 		0AF498221CED0095002D98F2 /* FavoriteMoviesDataStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteMoviesDataStore.m; sourceTree = "<group>"; };
 		0AF498241CEE13AA002D98F2 /* Movie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Movie.m; sourceTree = SOURCE_ROOT; };
+		0AF498261CEE9B00002D98F2 /* FavoriteMovieTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoriteMovieTableViewController.h; sourceTree = "<group>"; };
+		0AF498271CEE9B00002D98F2 /* FavoriteMovieTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoriteMovieTableViewController.m; sourceTree = "<group>"; };
+		0AF498291CEEBF96002D98F2 /* noun_156706_cc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = noun_156706_cc.png; path = ../../../Downloads/noun_156706_cc.png; sourceTree = "<group>"; };
+		0AF4982B1CEEC040002D98F2 /* noun_338176_cc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = noun_338176_cc.png; path = ../../../Downloads/noun_338176_cc.png; sourceTree = "<group>"; };
 		283B649BB43C9C361CE7973A /* Pods-PWEP-Work-file.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PWEP-Work-file.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PWEP-Work-file/Pods-PWEP-Work-file.debug.xcconfig"; sourceTree = "<group>"; };
 		D8D520974A79EE8DBE3FF254 /* Pods-PWEP-Work-file.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PWEP-Work-file.release.xcconfig"; path = "Pods/Target Support Files/Pods-PWEP-Work-file/Pods-PWEP-Work-file.release.xcconfig"; sourceTree = "<group>"; };
 		DCFBCC95F4EB5E307A3D1FF8 /* libPods-PWEP-Work-file.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PWEP-Work-file.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,8 +119,8 @@
 				0A8C381E1CD2B5E700A42B6B /* SelectedMovieViewController.m */,
 				0A8C38201CD2B61E00A42B6B /* MovieDecsriptionViewController.h */,
 				0A8C38211CD2B61E00A42B6B /* MovieDecsriptionViewController.m */,
-				0A8C38231CD2BD5C00A42B6B /* FavoritesViewController.h */,
-				0A8C38241CD2BD5C00A42B6B /* FavoritesViewController.m */,
+				0AF498261CEE9B00002D98F2 /* FavoriteMovieTableViewController.h */,
+				0AF498271CEE9B00002D98F2 /* FavoriteMovieTableViewController.m */,
 				0A8C38261CD5626600A42B6B /* FavoritesDescriptionViewController.h */,
 				0A8C38271CD5626600A42B6B /* FavoritesDescriptionViewController.m */,
 				0A8C38291CD562C400A42B6B /* FavoritesPlotViewController.h */,
@@ -127,6 +131,8 @@
 				0AF498221CED0095002D98F2 /* FavoriteMoviesDataStore.m */,
 				0A30C0E11CD2ACCB00A933BD /* Assets.xcassets */,
 				0A8C382F1CD7E75A00A42B6B /* jeremy.jpg */,
+				0AF4982B1CEEC040002D98F2 /* noun_338176_cc.png */,
+				0AF498291CEEBF96002D98F2 /* noun_156706_cc.png */,
 				0A30C0E31CD2ACCB00A933BD /* LaunchScreen.storyboard */,
 				0A30C0E61CD2ACCB00A933BD /* Info.plist */,
 				0A30C0D51CD2ACCB00A933BD /* Supporting Files */,
@@ -228,7 +234,9 @@
 				0A30C0E51CD2ACCB00A933BD /* LaunchScreen.storyboard in Resources */,
 				0A8C38301CD7E75A00A42B6B /* jeremy.jpg in Resources */,
 				0A30C0E21CD2ACCB00A933BD /* Assets.xcassets in Resources */,
+				0AF4982A1CEEBF96002D98F2 /* noun_156706_cc.png in Resources */,
 				0A30C0E01CD2ACCB00A933BD /* Main.storyboard in Resources */,
+				0AF4982C1CEEC040002D98F2 /* noun_338176_cc.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -292,13 +300,13 @@
 				0AF4981F1CECEC9A002D98F2 /* Movie+CoreDataProperties.m in Sources */,
 				0A8C382B1CD562C400A42B6B /* FavoritesPlotViewController.m in Sources */,
 				0A8C38331CD7F3CD00A42B6B /* ReloadDataFooterCollectionReusableView.m in Sources */,
-				0A8C38251CD2BD5C00A42B6B /* FavoritesViewController.m in Sources */,
 				0A30C0DA1CD2ACCB00A933BD /* AppDelegate.m in Sources */,
 				0A8C381F1CD2B5E700A42B6B /* SelectedMovieViewController.m in Sources */,
 				0AF498231CED0095002D98F2 /* FavoriteMoviesDataStore.m in Sources */,
 				0A8C38361CD7FEDE00A42B6B /* OmdbAPi.m in Sources */,
 				0A8C38281CD5626600A42B6B /* FavoritesDescriptionViewController.m in Sources */,
 				0A8C38221CD2B61E00A42B6B /* MovieDecsriptionViewController.m in Sources */,
+				0AF498281CEE9B00002D98F2 /* FavoriteMovieTableViewController.m in Sources */,
 				0AF498251CEE13AA002D98F2 /* Movie.m in Sources */,
 				0A30C0D71CD2ACCB00A933BD /* main.m in Sources */,
 				0AF4981A1CECEC00002D98F2 /* MovieModel.xcdatamodeld in Sources */,

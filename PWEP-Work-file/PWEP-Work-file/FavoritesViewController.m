@@ -31,20 +31,20 @@
 
 }
 
--(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
-}
-
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"favoriteMovieCell" forIndexPath:indexPath];
-    
-    return cell; 
-}
+//-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+//    return 1;
+//}
+//
+//-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+//    return 5;
+//}
+//
+//-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//    UITableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"favoriteMovieCell" forIndexPath:indexPath];
+//    
+//    return cell; 
+//}
 
 
 

@@ -9,6 +9,7 @@
 #import "FavoritesPlotViewController.h"
 
 @interface FavoritesPlotViewController ()
+@property (weak, nonatomic) IBOutlet UITextView *fullPlotText;
 
 @end
 
