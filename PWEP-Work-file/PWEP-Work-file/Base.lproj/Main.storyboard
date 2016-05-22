@@ -244,15 +244,15 @@
                                 <rect key="frame" x="0.0" y="30" width="600" height="240"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jeremy.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="EtF-ho-uCT">
-                                        <rect key="frame" x="150" y="0.0" width="300" height="240"/>
+                                        <rect key="frame" x="210" y="31" width="180" height="178"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="EtF-ho-uCT" firstAttribute="centerX" secondItem="mRD-Ks-rli" secondAttribute="centerX" id="Cdz-Pk-9BL"/>
                                     <constraint firstItem="EtF-ho-uCT" firstAttribute="centerY" secondItem="mRD-Ks-rli" secondAttribute="centerY" id="aPc-kT-yYh"/>
-                                    <constraint firstItem="EtF-ho-uCT" firstAttribute="width" secondItem="mRD-Ks-rli" secondAttribute="width" multiplier="0.5" id="hf4-4w-nLF"/>
-                                    <constraint firstItem="EtF-ho-uCT" firstAttribute="height" secondItem="mRD-Ks-rli" secondAttribute="height" id="qvf-Sn-Bce"/>
+                                    <constraint firstItem="EtF-ho-uCT" firstAttribute="width" secondItem="mRD-Ks-rli" secondAttribute="width" multiplier="0.3" id="hf4-4w-nLF"/>
+                                    <constraint firstItem="EtF-ho-uCT" firstAttribute="height" secondItem="mRD-Ks-rli" secondAttribute="height" multiplier="0.7" constant="10" id="qvf-Sn-Bce"/>
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="g3T-PH-5xd">
@@ -301,7 +301,7 @@
                                 <rect key="frame" x="30" y="515" width="540" height="30"/>
                                 <state key="normal" title="Full Plot Description"/>
                                 <connections>
-                                    <segue destination="86C-oR-GME" kind="show" id="bq2-Ye-87F"/>
+                                    <segue destination="86C-oR-GME" kind="show" identifier="plotSegue" id="bq2-Ye-87F"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -328,6 +328,7 @@
                     <connections>
                         <outlet property="blurBackGroundView" destination="mRD-Ks-rli" id="0jZ-hO-P6e"/>
                         <outlet property="directorLabel" destination="Jfb-Mb-Chj" id="oUi-AT-BI2"/>
+                        <outlet property="image" destination="EtF-ho-uCT" id="VTB-f7-jEe"/>
                         <outlet property="imdbScoreLabel" destination="10R-UD-UhD" id="Kiy-J3-1yQ"/>
                         <outlet property="plotText" destination="g3T-PH-5xd" id="Ws6-rm-Gp7"/>
                         <outlet property="posterImage" destination="mRD-Ks-rli" id="sp7-VS-exT"/>
@@ -386,11 +387,11 @@
             </objects>
             <point key="canvasLocation" x="3548" y="1123"/>
         </scene>
-        <!--Item-->
+        <!--Movies-->
         <scene sceneID="Olj-G7-Opf">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Y4O-y6-yPF" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="ko1-We-TKF"/>
+                    <tabBarItem key="tabBarItem" title="Movies" image="noun_156706_cc-1" selectedImage="noun_156706_cc-1" id="ko1-We-TKF"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1Jg-3M-HnL">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -432,16 +433,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavoriteMovieCell" rowHeight="94" id="qND-Us-EbB">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavoriteMovieCell" rowHeight="94" id="qND-Us-EbB" customClass="FavovriteMovieTableViewCell">
                                 <rect key="frame" x="0.0" y="92" width="600" height="94"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qND-Us-EbB" id="S0A-sQ-hDW">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="93"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="jeremy.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="fN0-aS-I6r">
-                                            <rect key="frame" x="8" y="0.0" width="115" height="93"/>
-                                        </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Release, Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kJ7-E2-cqm">
                                             <rect key="frame" x="131" y="0.0" width="419" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -466,10 +464,18 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fN0-aS-I6r">
+                                            <rect key="frame" x="8" y="0.0" width="115" height="93"/>
+                                        </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="pdE-eH-BTE" kind="show" id="4ad-fS-vcD"/>
+                                    <outlet property="actorsLabel" destination="kYc-TQ-jle" id="gsV-WM-SmT"/>
+                                    <outlet property="directorLabel" destination="qgZ-wg-ui7" id="REB-A2-9Rh"/>
+                                    <outlet property="posterImage" destination="fN0-aS-I6r" id="wP1-Gb-ELj"/>
+                                    <outlet property="titleLabel" destination="kJ7-E2-cqm" id="VcG-9x-8XR"/>
+                                    <outlet property="writerLabel" destination="Akv-lj-4an" id="O9k-nQ-UHJ"/>
+                                    <segue destination="pdE-eH-BTE" kind="show" identifier="movieCellSegue" id="4ad-fS-vcD"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -484,11 +490,11 @@
             </objects>
             <point key="canvasLocation" x="2043" y="1086"/>
         </scene>
-        <!--Item-->
+        <!--Favorites-->
         <scene sceneID="vVs-Pu-Mn8">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="45v-o5-v1n" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="wtn-gd-uw1"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="noun_338176_cc-1" selectedImage="noun_338176_cc-1" id="wtn-gd-uw1"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="DsW-ia-f4t">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -506,6 +512,8 @@
     </scenes>
     <resources>
         <image name="jeremy.jpg" width="352" height="207"/>
-        <image name="noun_156706_cc.png" width="700" height="700"/>
+        <image name="noun_156706_cc-1" width="50" height="35"/>
+        <image name="noun_156706_cc.png" width="50" height="35"/>
+        <image name="noun_338176_cc-1" width="50" height="41"/>
     </resources>
 </document>

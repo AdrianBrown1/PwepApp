@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FavoriteMoviesDataStore.h"
 
 @interface MovieDecsriptionViewController : UIViewController
+
 @property (weak, nonatomic) NSString *imdbID;
+
+@property (strong, nonatomic) Movie *movie;
 
 @end

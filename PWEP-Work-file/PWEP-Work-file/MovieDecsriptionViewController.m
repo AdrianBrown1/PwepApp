@@ -17,10 +17,14 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-
-    [OmdbAPi getPlotSelection:self.imdbID withCompletion:^(Movie *movie) {
+    
+    [OmdbAPi getFullDictionary:self.movie.omdbID withCompletion:^(NSDictionary *dictionary) {
         
-        self.fullPlotTextView.text = movie.plot; 
+        NSString *plot = [NSString stringWithFormat:@"%@",[dictionary valueForKey:@"Plot"]];
+        
+        self.fullPlotTextView.text = plot;
+        
+        
     }];
 
 }

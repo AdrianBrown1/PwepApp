@@ -38,11 +38,13 @@
     
     [self.view addSubview:self.collectionView];
     
+    NSArray *randomMovie = @[@"star wars", @"ninja",@"basketball",@"racing"];
     
     
-    NSString *starwars = [NSString stringWithFormat:@"s=star+wars&page=1"];
     
-    [OmdbAPi getMoviesForSelection:starwars WithCompletion:^(NSArray *movies) {
+    NSString *myString = [randomMovie objectAtIndex:arc4random()%[randomMovie count]];
+    
+    [OmdbAPi getMoviesForSelection:myString WithCompletion:^(NSArray *movies) {
         
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             
@@ -55,32 +57,49 @@
     }];
     
     
+//    UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]
+//                                           initWithTarget:self
+//                                           action:@selector(hideKeyBoard)];
+//    
+//    [self.view addGestureRecognizer:tapGesture];
+
+    
 }
 
+// Hide SearchBar
+-(void)hideKeyBoard {
+//    [self.sBar resignFirstResponder];
+}
+
+// API call with SearchBar
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     [searchBar resignFirstResponder];
     
     NSString *userSearched = searchBar.text;
     
-    NSString *newString = [userSearched stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+   // NSString *newString = [userSearched stringByReplacingOccurrencesOfString:@" " withString:@"+"];
 
-    NSString *userInput = [NSString stringWithFormat:@"s=%@&page=1",newString];
+   // NSString *userInput = [NSString stringWithFormat:@"s=%@",newString];
+    NSString *userInput = userSearched;
     
-    NSLog(@"  \n\n\n USER input %@ \n\n\n",userInput);
-    
+    [self.MovieArray removeAllObjects];
     [OmdbAPi getMoviesForSelection:userInput WithCompletion:^(NSArray *movies) {
         
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             
             [self.MovieArray addObjectsFromArray:movies];
             
-            [self.collectionView reloadData];
+            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+                [self.collectionView reloadData];
+
+            }];
             
         }];
         
     }];
-
+    
+    [searchBar resignFirstResponder];
     
 
 }
@@ -145,7 +164,7 @@
     
         SelectedMovieViewController *destinationVC = [segue destinationViewController];
         
-        destinationVC.imdbID = movieTapped.omdbID;
+        destinationVC.movie = movieTapped;
     
     }
 }

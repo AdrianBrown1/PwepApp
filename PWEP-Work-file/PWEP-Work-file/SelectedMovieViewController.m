@@ -7,10 +7,7 @@
 //
 
 #import "SelectedMovieViewController.h"
-#import "MainPageViewController.h"
-#import "OmdbAPi.h"
-#import "MovieDecsriptionViewController.h"
-#import "FavoriteMoviesDataStore.h"
+#import "MovieObject.h"
 @interface SelectedMovieViewController ()
 @property (nonatomic,strong)Movie *movieToBeSaved;
 
@@ -20,72 +17,94 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    FavoriteMoviesDataStore *dataStore = [FavoriteMoviesDataStore sharedDataStore];
-    self.movieToBeSaved = [NSEntityDescription insertNewObjectForEntityForName:@"Movie" inManagedObjectContext:dataStore.managedObjectContext];
     
-           [OmdbAPi getMovieForSelection:self.imdbID withCompletion:^(Movie *movie) {
-               
-               self.movieToBeSaved = movie;
-               NSLog(@"\n\n\n\n Movie !: %@ \n\n\n\n",self.movieToBeSaved);
-               
-               self.directorLabel.text = [NSString stringWithFormat:@"Director: %@",movie.director];
-               self.writerLabel.text = [NSString stringWithFormat:@"Writer: %@",movie.writer];
-               NSLog(@" \n\n\n\n Writer: %@ \n\n\n\n",movie.writer);
-               
-               self.starsLabel.text  = [NSString stringWithFormat:@"Actors: %@ \n",movie.stars];
-               self.releasedLabel.text = [NSString stringWithFormat:@"Released: %@",movie.year];
-               self.imdbScoreLabel.text = [NSString stringWithFormat:@"IMDB Score: %@",movie.imdbScore];
-               self.movieTextView.text = movie.plot;
+    self.dictionary = [NSMutableDictionary new];
     
-    
-               NSOperationQueue *backgroundQueue = [NSOperationQueue new];
-    
-               [backgroundQueue addOperationWithBlock:^{
-    
-                   NSURL *url = [NSURL URLWithString:movie.poster];
-    
-                   NSData *data = [NSData dataWithContentsOfURL:url];
-    
-                   UIImage *posterImage = [UIImage imageWithData:data];
-    
-                   [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-                       self.movieImage.image = posterImage;
-                       
-                   }];
-//                   self.movieToBeSaved = movie;
-                   
-                   
-                }];
-           }];
-
-
-    
+    [OmdbAPi getDictionary:self.movie.omdbID withCompletion:^(NSDictionary *dictionary) {
+        
+        
+        NSString *director = [NSString stringWithFormat:@"Director: %@",[dictionary valueForKey:@"Director"]];
+        NSString *writer = [NSString stringWithFormat:@"Writer: %@",[dictionary valueForKey:@"Writer"]];
+        NSString *stars = [NSString stringWithFormat:@"Stars: %@",[dictionary valueForKey:@"Actors"]];
+        NSString *year = [NSString stringWithFormat:@"Released: %@",[dictionary valueForKey:@"Year"]];
+        NSString *imdbScore = [NSString stringWithFormat:@"IMDB Score: %@",[dictionary valueForKey:@"imdbRating"]];
+        NSString *plot = [NSString stringWithFormat:@"%@",[dictionary valueForKey:@"Plot"]];
+        
+        self.directorLabel.text = director;
+        self.writerLabel.text = writer;
+        self.starsLabel.text = stars;
+        self.releasedLabel.text = year;
+        self.imdbScoreLabel.text = imdbScore;
+        self.movieTextView.text = plot;
+        
+        
+        NSOperationQueue *backgroundQueue = [NSOperationQueue new];
+        
+        [backgroundQueue addOperationWithBlock:^{
+            
+            NSString *urlString = [NSString stringWithFormat:@"%@",[dictionary valueForKey:@"Poster"]];
+            
+            NSURL *url = [NSURL URLWithString:urlString];
+            
+            NSData *data = [NSData dataWithContentsOfURL:url];
+            
+            UIImage *posterImage = [UIImage imageWithData:data];
+            
+            [[NSOperationQueue mainQueue]addOperationWithBlock:^{
+                
+                self.movieImage.image = posterImage;
+                
+            }];
+            
+        }];
+        
+        [self.dictionary addEntriesFromDictionary:dictionary];
+        NSLog(@"dictionary %@ ====== ",self.dictionary);
+        
+    }];
     
     UIBarButtonItem *barButton = [[UIBarButtonItem alloc]
-                                   initWithTitle:@"favorite"
-                                   style:UIBarButtonItemStylePlain
-                                   target:self
-                                   action:@selector(FavoriteMovie:)];
+                                  initWithTitle:@"Favorite"
+                                  style:UIBarButtonItemStylePlain
+                                  target:self
+                                  action:@selector(FavoriteMovie:)];
     self.navigationItem.rightBarButtonItem = barButton;
-
     
-
+    
+    
     
 }
 
 -(IBAction)FavoriteMovie:(id)sender{
-
+    
     NSLog(@"Ive been tapped !!");
     
     FavoriteMoviesDataStore *dataStore = [FavoriteMoviesDataStore sharedDataStore];
     Movie *movie = [NSEntityDescription insertNewObjectForEntityForName:@"Movie" inManagedObjectContext:dataStore.managedObjectContext];
     
-    NSLog(@" \n\n\n\n WHAT IS THE MOVIE BEING TAPPED %@ \n\n\n\n", self.movieToBeSaved);
+    NSString *director = [NSString stringWithFormat:@"%@",[self.dictionary valueForKey:@"Director"]];
+    NSString *writer = [NSString stringWithFormat:@"%@",[self.dictionary valueForKey:@"Writer"]];
+    NSString *stars = [NSString stringWithFormat:@"%@",[self.dictionary valueForKey:@"Actors"]];
+    NSString *year = [NSString stringWithFormat:@"%@",[self.dictionary valueForKey:@"Year"]];
+    NSString *imdbScore = [NSString stringWithFormat:@"%@",[self.dictionary valueForKey:@"imdbRating"]];
+    NSString *plot = [NSString stringWithFormat:@"%@",[self.dictionary valueForKey:@"Plot"]];
+    NSString *omdbID = [NSString stringWithFormat:@"%@",[self.dictionary valueForKey:@"imdbID"]];
+    NSString *title = [NSString stringWithFormat:@"%@",[self.dictionary valueForKey:@"Title"]];
+    NSString *type = [NSString stringWithFormat:@"%@",[self.dictionary valueForKey:@"Type"]];
+    NSString *poster = [NSString stringWithFormat:@"%@",[self.dictionary valueForKey:@"Poster"]];
     
-    movie = self.movieToBeSaved;
     
-    NSLog(@"\n\n\n\n\n What is a movie %@ \n\n\n\n\n",movie);
+    movie.director = director;
+    movie.imdbScore = imdbScore;
+    movie.plot = plot;
+    movie.stars = stars;
+    movie.writer = writer;
+    movie.omdbID = omdbID;
+    movie.poster = poster;
+    movie.title = title;
+    movie.type = type;
+    movie.year = year;
+    
     
     [dataStore saveContext];
     
@@ -113,9 +132,9 @@
     if ([[segue identifier] isEqualToString:@"plotSegue"])
     {
         MovieDecsriptionViewController *destinationVC = [segue destinationViewController];
-        destinationVC.imdbID = self.imdbID;
+        destinationVC.movie = self.movie;
     }
-
+    
 }
 
 

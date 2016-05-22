@@ -7,16 +7,10 @@
 //
 
 #import "FavoritesDescriptionViewController.h"
-
+#import "OmdbAPi.h"
+#import "FavoritesPlotViewController.h"
 @interface FavoritesDescriptionViewController ()
-@property (weak, nonatomic) IBOutlet UIView *blurBackGroundView;
-@property (weak, nonatomic) IBOutlet UIView *posterImage;
-@property (weak, nonatomic) IBOutlet UITextView *plotText;
-@property (weak, nonatomic) IBOutlet UIStackView *releasedLabel;
-@property (weak, nonatomic) IBOutlet UILabel *directorLabel;
-@property (weak, nonatomic) IBOutlet UILabel *writerLabel;
-@property (weak, nonatomic) IBOutlet UILabel *starsLabel;
-@property (weak, nonatomic) IBOutlet UILabel *imdbScoreLabel;
+
 
 
 @end
@@ -25,7 +19,55 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+//    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+//    UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+//    blurEffectView.frame = self.blurBackGroundView.bounds;
+//    blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+//    
+//    [self.blurBackGroundView addSubview:blurEffectView];
+    
+    
+    
+    [OmdbAPi getDictionary:self.movie.omdbID withCompletion:^(NSDictionary *dictionary) {
+    
+        NSString *director = [NSString stringWithFormat:@"Director: %@",[dictionary valueForKey:@"Director"]];
+        NSString *writer = [NSString stringWithFormat:@"Writer: %@",[dictionary valueForKey:@"Writer"]];
+        NSString *stars = [NSString stringWithFormat:@"Stars: %@",[dictionary valueForKey:@"Actors"]];
+        //NSString *year = [NSString stringWithFormat:@"Released: %@",[dictionary valueForKey:@"Year"]];
+        NSString *imdbScore = [NSString stringWithFormat:@"IMDB Score: %@",[dictionary valueForKey:@"imdbRating"]];
+        NSString *plot = [NSString stringWithFormat:@"%@",[dictionary valueForKey:@"Plot"]];
+        
+        self.directorLabel.text = director;
+        self.writerLabel.text = writer;
+        self.starsLabel.text = stars;
+        self.imdbScoreLabel.text = imdbScore;
+        self.plotText.text = plot;
+        
+        
+        NSOperationQueue *backgroundQueue = [NSOperationQueue new];
+        
+        [backgroundQueue addOperationWithBlock:^{
+            
+            NSString *urlString = [NSString stringWithFormat:@"%@",[dictionary valueForKey:@"Poster"]];
+            
+            NSURL *url = [NSURL URLWithString:urlString];
+            
+            NSData *data = [NSData dataWithContentsOfURL:url];
+            
+            UIImage *posterImage = [UIImage imageWithData:data];
+            
+            [[NSOperationQueue mainQueue]addOperationWithBlock:^{
+                
+                self.image.image = posterImage;
+                
+            }];
+            
+        }];
+   
+    
+    }];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,14 +75,19 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
+
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    
+    if ([[segue identifier] isEqualToString:@"plotSegue"])
+    {
+        FavoritesPlotViewController *destinationVC = [segue destinationViewController];
+        destinationVC.movie = self.movie;
+    }
+
+
 }
-*/
+
 
 @end

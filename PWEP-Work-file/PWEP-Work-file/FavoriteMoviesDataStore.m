@@ -14,18 +14,29 @@
 +(FavoriteMoviesDataStore *)sharedDataStore {
     
     
-    static FavoriteMoviesDataStore *theinstance = nil;
+    static FavoriteMoviesDataStore *_sharedDataStore = nil;
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^ {
-        theinstance = [[FavoriteMoviesDataStore alloc]init];
+        _sharedDataStore = [[FavoriteMoviesDataStore alloc]init];
         
     });
+    NSLog(@" WHAT IS IN HERE ! %@", _sharedDataStore);
     
-    return  theinstance;
+    return  _sharedDataStore;
     
 }
+-(void)fetchData {
+    
+        NSFetchRequest *allItemsRequest = [NSFetchRequest fetchRequestWithEntityName:@"Movie"];
+    
+    
+    
+        self.favoriteMovies = [self.managedObjectContext executeFetchRequest:allItemsRequest error:nil];
+    
+    
 
+}
 - (void)saveContext
 {
     NSError *error = nil;

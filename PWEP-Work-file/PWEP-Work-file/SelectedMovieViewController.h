@@ -7,6 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MainPageViewController.h"
+#import "OmdbAPi.h"
+#import "MovieDecsriptionViewController.h"
+#import "FavoriteMoviesDataStore.h"
+
 
 @interface SelectedMovieViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIImageView *movieImage;
@@ -16,5 +21,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *writerLabel;
 @property (weak, nonatomic) IBOutlet UILabel *starsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *imdbScoreLabel;
-@property (strong, nonatomic) NSString *imdbID; 
+@property (strong, nonatomic) NSString *imdbID;
+@property (strong, nonatomic) Movie *movie;
+@property (strong, nonatomic)NSMutableDictionary *dictionary;
+
 @end

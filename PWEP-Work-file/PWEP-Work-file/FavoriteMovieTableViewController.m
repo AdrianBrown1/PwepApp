@@ -8,7 +8,12 @@
 
 #import "FavoriteMovieTableViewController.h"
 #import "FavoriteMoviesDataStore.h"
+#import "FavovriteMovieTableViewCell.h"
+#import "FavoritesDescriptionViewController.h"
+
 @interface FavoriteMovieTableViewController ()
+
+@property (nonatomic, strong)Movie *movie;
 @property (nonatomic, strong)NSMutableArray *allMovies;
 
 @end
@@ -18,17 +23,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-//    self.allMovies = [NSMutableArray new];
-//    
-//    NSFetchRequest *allItemsRequest = [NSFetchRequest fetchRequestWithEntityName:@"MovieModel"];
-//    
-//    FavoriteMoviesDataStore *dataStore = [FavoriteMoviesDataStore sharedDataStore];
-//    
-//    NSArray *allItems = [dataStore.managedObjectContext executeFetchRequest:allItemsRequest error:nil];
-//    
-//    [self.allMovies addObjectsFromArray:allItems];
+    self.allMovies = [NSMutableArray new];
+    
+    
+    FavoriteMoviesDataStore *dataStore = [FavoriteMoviesDataStore sharedDataStore];
+    
+    [dataStore fetchData];
+    
+    
+    
+    
+    [self.allMovies addObjectsFromArray:dataStore.favoriteMovies];
+    
 
 }
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    [self.tableView reloadData];
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -37,17 +51,44 @@
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return self.allMovies.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    return self.allMovies.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FavoriteMovieCell" forIndexPath:indexPath];
+    FavovriteMovieTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FavoriteMovieCell" forIndexPath:indexPath];
     
+   self.movie = [self.allMovies objectAtIndex:indexPath.row];
+    
+    cell.titleLabel.text = self.movie.title;
+    cell.writerLabel.text = self.movie.writer;
+    cell.actorsLabel.text = self.movie.stars;
+    
+    
+    // need to set image still 
+    NSOperationQueue *backgroundQueue = [NSOperationQueue new];
+    
+    [backgroundQueue addOperationWithBlock:^{
+        
+        NSURL *url = [NSURL URLWithString:self.movie.poster];
+        
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        
+        UIImage *posterImage = [UIImage imageWithData:data];
+        
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+           
+            cell.imageView.image = posterImage;
+            
+        }];
+        
+        
+    }];
+
     
     return cell;
 }
@@ -56,8 +97,20 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    
+    if ([[segue identifier] isEqualToString:@"movieCellSegue"] ) {
+       
+        
+        
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+
+
+        FavoritesDescriptionViewController *destinationVC = [segue destinationViewController];
+        
+        
+        destinationVC.movie = [self.allMovies objectAtIndex:indexPath.row]; ;
+        
+    }
 }
 
 

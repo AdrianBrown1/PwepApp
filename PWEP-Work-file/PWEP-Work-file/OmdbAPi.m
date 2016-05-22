@@ -9,6 +9,7 @@
 #import "OmdbAPi.h"
 #import "MainPageViewController.h"
 #import "FavoriteMoviesDataStore.h"
+#import "MovieObject.h"
 
 @implementation OmdbAPi
 
@@ -24,7 +25,7 @@
     //searchedMovieName = [NSString stringWithFormat:@"s=star+wars&page=1"];
    // NSString *urlString = [NSString stringWithFormat:@"http://www.omdbapi.com/?s=%@&page=1",newString];
     
-   NSString *urlString = [NSString stringWithFormat:@"http://www.omdbapi.com/?s=star+wars&page=1"];
+   NSString *urlString = [NSString stringWithFormat:@"http://www.omdbapi.com/?s=%@&page=1",newString];
     
     AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
     
@@ -35,25 +36,14 @@
         NSMutableArray *movieObjects = [NSMutableArray new];
         
         for (NSDictionary *singleMovie  in moviesSorted) {
+           
+            MovieObject *movieObject = [[MovieObject alloc]initWithDictionar:singleMovie];
             
-            // Movie *movie = [[Movie alloc]initWithDictionary:singleMovie];
-
-            FavoriteMoviesDataStore *dataStore = [FavoriteMoviesDataStore sharedDataStore];
-            Movie *movie = [NSEntityDescription insertNewObjectForEntityForName:@"Movie" inManagedObjectContext:dataStore.managedObjectContext];
+           // FavoriteMoviesDataStore *dataStore = [FavoriteMoviesDataStore sharedDataStore];
             
-            movie.title = [singleMovie valueForKey:@"Title"];
-            movie.type = [singleMovie valueForKey:@"Type"];
-            movie.omdbID = [singleMovie valueForKey:@"imdbID"];
-            movie.poster = [singleMovie valueForKey:@"Poster"];
             
-            movie.year = [singleMovie valueForKey:@"Year"];
-            movie.director = [singleMovie valueForKey:@"Director"];
-            movie.writer = [singleMovie valueForKey:@"Writer"];
-            movie.stars = [singleMovie valueForKey:@"Actors"];
-            movie.imdbScore = [singleMovie valueForKey:@"imdbRating"];
-            movie.plot = [singleMovie valueForKey:@"Plot"];
             
-            [movieObjects addObject:movie];
+            [movieObjects addObject:movieObject];
             
         }
         completion(movieObjects); 
@@ -63,95 +53,158 @@
     }];
 
 }
-+(void)getMovieForSelection:(NSString *)movieID withCompletion:(void (^) (Movie *movie))completion{
+
+
+
++(void)getDictionary:(NSString *)movieID withCompletion:(void (^)(NSDictionary  *dictionary) )completion{
     
     movieID = movieID;
-    NSLog(@"movie id is %@",movieID); 
     NSString *urlString = [NSString stringWithFormat:@"http://www.omdbapi.com/?i=%@&plot=short&r=json",movieID];
-    NSLog(@" URL STRING IS %@",urlString); 
     AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
     
     [sessionManager GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSArray *moviesSorted = [NSArray arrayWithObject:responseObject];
         
-        FavoriteMoviesDataStore *dataStore = [FavoriteMoviesDataStore sharedDataStore];
-        Movie *movieTapped = [NSEntityDescription insertNewObjectForEntityForName:@"Movie" inManagedObjectContext:dataStore.managedObjectContext];
+        NSMutableDictionary *movieDictionary = [NSMutableDictionary new];
         
         for (NSDictionary *singleMovie in moviesSorted) {
-            FavoriteMoviesDataStore *dataStore = [FavoriteMoviesDataStore sharedDataStore];
-            Movie *movie = [NSEntityDescription insertNewObjectForEntityForName:@"Movie" inManagedObjectContext:dataStore.managedObjectContext];
+            NSLog(@" WHAT is a single movie %@", singleMovie);
             
-            movie.title = [singleMovie valueForKey:@"Title"];
-            movie.type = [singleMovie valueForKey:@"Type"];
-            movie.omdbID = [singleMovie valueForKey:@"imdbID"];
-            movie.poster = [singleMovie valueForKey:@"Poster"];
+            [movieDictionary addEntriesFromDictionary:singleMovie];
             
-            movie.year = [singleMovie valueForKey:@"Year"];
-            movie.director = [singleMovie valueForKey:@"Director"];
-            movie.writer = [singleMovie valueForKey:@"Writer"];
-            movie.stars = [singleMovie valueForKey:@"Actors"];
-            movie.imdbScore = [singleMovie valueForKey:@"imdbRating"];
-            movie.plot = [singleMovie valueForKey:@"Plot"];
-            
-            movieTapped = movie;
-            
+            NSLog(@" \n\n\n\n HAVE I BEEN CHANGED !%@ \n\n\n\n ",movieDictionary); 
         }
-       completion(movieTapped);
+
+        completion(movieDictionary);
+        NSLog(@" \n\n\n\n WHAT AM I !! %@ \n\n\n\n\n",movieDictionary);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-    
-        NSLog(@" ERROR: %@",error); 
+        
+        NSLog(@" \n\n\n\n\n ERROR: %@ \n\n\n\n ",error);
         
     }];
-
+   
 }
 
-
-+(void)getPlotSelection:(NSString *)movieID withCompletion:(void (^) (Movie *movie))completion{
++(void)getFullDictionary:(NSString *)movieID withCompletion:(void (^)(NSDictionary  *dictionary) )completion{
     
     movieID = movieID;
-    NSLog(@"movie id is %@",movieID);
     NSString *urlString = [NSString stringWithFormat:@"http://www.omdbapi.com/?i=%@&plot=full&r=json",movieID];
-    NSLog(@" URL STRING IS %@",urlString);
     AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
     
     [sessionManager GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
         NSArray *moviesSorted = [NSArray arrayWithObject:responseObject];
         
-        FavoriteMoviesDataStore *dataStore = [FavoriteMoviesDataStore sharedDataStore];
-        Movie *movieTapped = [NSEntityDescription insertNewObjectForEntityForName:@"Movie" inManagedObjectContext:dataStore.managedObjectContext];
+        NSMutableDictionary *movieDictionary = [NSMutableDictionary new];
         
         for (NSDictionary *singleMovie in moviesSorted) {
-            FavoriteMoviesDataStore *dataStore = [FavoriteMoviesDataStore sharedDataStore];
-            Movie *movie = [NSEntityDescription insertNewObjectForEntityForName:@"Movie" inManagedObjectContext:dataStore.managedObjectContext];
+            NSLog(@" WHAT is a single movie %@", singleMovie);
             
-            movie.title = [singleMovie valueForKey:@"Title"];
-            movie.type = [singleMovie valueForKey:@"Type"];
-            movie.omdbID = [singleMovie valueForKey:@"imdbID"];
-            movie.poster = [singleMovie valueForKey:@"Poster"];
+            [movieDictionary addEntriesFromDictionary:singleMovie];
             
-            movie.year = [singleMovie valueForKey:@"Year"];
-            movie.director = [singleMovie valueForKey:@"Director"];
-            movie.writer = [singleMovie valueForKey:@"Writer"];
-            movie.stars = [singleMovie valueForKey:@"Actors"];
-            movie.imdbScore = [singleMovie valueForKey:@"imdbRating"];
-            movie.plot = [singleMovie valueForKey:@"Plot"];
-            
-            movieTapped = movie;
-            
+            NSLog(@" \n\n\n\n HAVE I BEEN CHANGED !%@ \n\n\n\n ",movieDictionary);
         }
-        completion(movieTapped);
-
+        
+        completion(movieDictionary);
+        NSLog(@" \n\n\n\n WHAT AM I !! %@ \n\n\n\n\n",movieDictionary);
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-        NSLog(@" ERROR: %@",error);
+        NSLog(@" \n\n\n\n\n ERROR: %@ \n\n\n\n ",error);
         
     }];
     
 }
+
+
+
+
+//+(void)getMovieForSelection:(NSString *)movieID withCompletion:(void (^) (Movie *movie))completion{
+//    
+//    movieID = movieID;
+//    NSString *urlString = [NSString stringWithFormat:@"http://www.omdbapi.com/?i=%@&plot=short&r=json",movieID];
+//    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
+//    
+//    [sessionManager GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//        
+//        NSArray *moviesSorted = [NSArray arrayWithObject:responseObject];
+//        
+//        FavoriteMoviesDataStore *dataStore = [FavoriteMoviesDataStore sharedDataStore];
+//       
+//      Movie *movieTapped = [NSEntityDescription insertNewObjectForEntityForName:@"Movie" inManagedObjectContext:dataStore.managedObjectContext];
+//        
+//        
+//        for (NSDictionary *singleMovie in moviesSorted) {
+//
+//            movieTapped.title = [singleMovie valueForKey:@"Title"];
+//            movieTapped.type = [singleMovie valueForKey:@"Type"];
+//            movieTapped.omdbID = [singleMovie valueForKey:@"imdbID"];
+//            movieTapped.poster = [singleMovie valueForKey:@"Poster"];
+//            
+//            movieTapped.year = [singleMovie valueForKey:@"Year"];
+//            movieTapped.director = [singleMovie valueForKey:@"Director"];
+//            movieTapped.writer = [singleMovie valueForKey:@"Writer"];
+//            movieTapped.stars = [singleMovie valueForKey:@"Actors"];
+//            movieTapped.imdbScore = [singleMovie valueForKey:@"imdbRating"];
+//            movieTapped.plot = [singleMovie valueForKey:@"Plot"];
+//            
+//        }
+//       completion(movieTapped);
+//        
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//    
+//        NSLog(@" ERROR: %@",error); 
+//        
+//    }];
+//
+//}
+//
+//
+//
+//+(void)getPlotSelection:(NSString *)movieID withCompletion:(void (^) (Movie *movie))completion{
+//    
+//    movieID = movieID;
+//    NSLog(@"movie id is %@",movieID);
+//    NSString *urlString = [NSString stringWithFormat:@"http://www.omdbapi.com/?i=%@&plot=full&r=json",movieID];
+//    NSLog(@" URL STRING IS %@",urlString);
+//    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
+//    
+//    [sessionManager GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+//        
+//        NSArray *moviesSorted = [NSArray arrayWithObject:responseObject];
+//        
+//        FavoriteMoviesDataStore *dataStore = [FavoriteMoviesDataStore sharedDataStore];
+//        Movie *movieTapped = [NSEntityDescription insertNewObjectForEntityForName:@"Movie" inManagedObjectContext:dataStore.managedObjectContext];
+//        
+//        
+//        for (NSDictionary *singleMovie in moviesSorted) {
+//            
+//            movieTapped.title = [singleMovie valueForKey:@"Title"];
+//            movieTapped.type = [singleMovie valueForKey:@"Type"];
+//            movieTapped.omdbID = [singleMovie valueForKey:@"imdbID"];
+//            movieTapped.poster = [singleMovie valueForKey:@"Poster"];
+//            
+//            movieTapped.year = [singleMovie valueForKey:@"Year"];
+//            movieTapped.director = [singleMovie valueForKey:@"Director"];
+//            movieTapped.writer = [singleMovie valueForKey:@"Writer"];
+//            movieTapped.stars = [singleMovie valueForKey:@"Actors"];
+//            movieTapped.imdbScore = [singleMovie valueForKey:@"imdbRating"];
+//            movieTapped.plot = [singleMovie valueForKey:@"Plot"];
+//            
+//            
+//        }
+//        completion(movieTapped);
+//
+//        
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        
+//        NSLog(@" ERROR: %@",error);
+//        
+//    }];
+//    
+//}
 
 
 @end

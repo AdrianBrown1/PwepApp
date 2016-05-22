@@ -15,8 +15,9 @@
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
 - (void)saveContext;
+-(void)fetchData;
 
-
-@property (nonatomic, strong) NSMutableArray *favoriteMovies;
+@property (nonatomic, strong) NSArray *favoriteMovies;
+@property (nonatomic ,strong) FavoriteMoviesDataStore *dataStore; 
 
 @end
