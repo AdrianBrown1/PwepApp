@@ -18,13 +18,13 @@
 
 +(void)getMoviesForSelection:(NSString *)searchedMovieName WithCompletion:(void (^) (NSArray *movies)) completion;
 
++(void)getMoreMoviesForSelection:(NSString *)searchedMovieName WithCompletion:(void (^) (NSArray *movies)) completion;
+
 +(void)getDictionary:(NSString *)movieID withCompletion:(void (^)(NSDictionary  *dictionary) )completion;
 
 +(void)getFullDictionary:(NSString *)movieID withCompletion:(void (^)(NSDictionary  *dictionary) )completion;
 
 
-//+(void)getMovieForSelection:(NSString *)movieID withCompletion:(void (^) (Movie *movie))completion;
-//
-//+(void)getPlotSelection:(NSString *)movieID withCompletion:(void (^) (Movie *movie))completion;
+
 
 @end

@@ -105,7 +105,7 @@
     movie.type = type;
     movie.year = year;
     
-    
+    NSLog(@"about to save to coreData");
     [dataStore saveContext];
     
     

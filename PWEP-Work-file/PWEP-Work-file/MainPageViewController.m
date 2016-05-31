@@ -55,13 +55,6 @@
         }];
         
     }];
-    
-    
-//    UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc]
-//                                           initWithTarget:self
-//                                           action:@selector(hideKeyBoard)];
-//    
-//    [self.view addGestureRecognizer:tapGesture];
 
     
 }
@@ -71,16 +64,12 @@
 //    [self.sBar resignFirstResponder];
 }
 
-// API call with SearchBar
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+-(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     [searchBar resignFirstResponder];
     
     NSString *userSearched = searchBar.text;
     
-   // NSString *newString = [userSearched stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-
-   // NSString *userInput = [NSString stringWithFormat:@"s=%@",newString];
     NSString *userInput = userSearched;
     
     [self.MovieArray removeAllObjects];
@@ -108,18 +97,19 @@
    
    MovieCollectionViewCell *movieCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     
-        // once you have image, jump on main queue and assign value to cell.cellImage.image
-    
     NSOperationQueue *backgroundQueue = [NSOperationQueue new];
     
     [backgroundQueue addOperationWithBlock:^{
         
-            // write statements to download image
-            // NSData... dataWithContents...
-            // NSURL...
-        
-            
         Movie *singleMovie = self.MovieArray[indexPath.row];
+        
+        NSLog(@"poster = %@",singleMovie.poster);
+        
+        if ([singleMovie.poster isEqualToString:@"n/a"]) {
+           
+            
+            movieCell.cellImage.image =[UIImage imageNamed:@"jeremy.jpg"];
+        }
         
             NSURL *url = [NSURL URLWithString:singleMovie.poster];
             
@@ -130,7 +120,6 @@
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             
              movieCell.cellImage.image = posterImage;
-
         
         }];
         
@@ -186,16 +175,25 @@
 
 // protocol method being implemented 
 -(void)buttonPressed:(UIButton *)button {
-    NSLog(@" Ive been tapped !"); 
+    
+    NSString *starwars = @"star wars";
 
     
-    NSUInteger number = 1;
     
-    NSString *starwars = [NSString stringWithFormat:@"s=star+wars&page=%lu",number + 1];
     
-    NSLog(@" What page am i on %@", starwars);
+    //create a property called search term so when search bar is used it updates the property with the user input
+    // once i have the search term i can pass forward that term.
     
-    [OmdbAPi getMoviesForSelection:starwars WithCompletion:^(NSArray *movies) {
+    // loading the pages.
+    
+    // total results value
+    
+    // pass forward integer value of array count 
+    
+    
+    
+    
+    [OmdbAPi getMoreMoviesForSelection:starwars WithCompletion:^(NSArray *movies) {
         
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             

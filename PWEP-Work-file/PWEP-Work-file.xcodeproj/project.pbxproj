@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A2DFD0A1CF3765C0053F8F8 /* noun_135445_cc.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A2DFD091CF3765C0053F8F8 /* noun_135445_cc.png */; };
 		0A30C0D71CD2ACCB00A933BD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A30C0D61CD2ACCB00A933BD /* main.m */; };
 		0A30C0DA1CD2ACCB00A933BD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A30C0D91CD2ACCB00A933BD /* AppDelegate.m */; };
 		0A30C0E01CD2ACCB00A933BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A30C0DE1CD2ACCB00A933BD /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A2DFD091CF3765C0053F8F8 /* noun_135445_cc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = noun_135445_cc.png; path = ../../../Downloads/noun_135445_cc.png; sourceTree = "<group>"; };
 		0A30C0D21CD2ACCB00A933BD /* PWEP-Work-file.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PWEP-Work-file.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A30C0D61CD2ACCB00A933BD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0A30C0D81CD2ACCB00A933BD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				0A30C0E11CD2ACCB00A933BD /* Assets.xcassets */,
 				0AF4982B1CEEC040002D98F2 /* noun_338176_cc.png */,
 				0A8C382F1CD7E75A00A42B6B /* jeremy.jpg */,
+				0A2DFD091CF3765C0053F8F8 /* noun_135445_cc.png */,
 				0AF498291CEEBF96002D98F2 /* noun_156706_cc.png */,
 				0A30C0E31CD2ACCB00A933BD /* LaunchScreen.storyboard */,
 				0A30C0E61CD2ACCB00A933BD /* Info.plist */,
@@ -241,6 +244,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A2DFD0A1CF3765C0053F8F8 /* noun_135445_cc.png in Resources */,
 				0A30C0E51CD2ACCB00A933BD /* LaunchScreen.storyboard in Resources */,
 				0A8C38301CD7E75A00A42B6B /* jeremy.jpg in Resources */,
 				0A30C0E21CD2ACCB00A933BD /* Assets.xcassets in Resources */,

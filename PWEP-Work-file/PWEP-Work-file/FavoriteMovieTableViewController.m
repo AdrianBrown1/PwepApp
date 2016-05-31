@@ -49,11 +49,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.allMovies.count;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.allMovies.count;
 }
@@ -82,7 +77,7 @@
         
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
            
-            cell.imageView.image = posterImage;
+            cell.posterImage.image = posterImage;
             
         }];
         

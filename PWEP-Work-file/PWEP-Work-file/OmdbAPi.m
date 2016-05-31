@@ -11,12 +11,16 @@
 #import "FavoriteMoviesDataStore.h"
 #import "MovieObject.h"
 
+@interface OmdbAPi ()
+@property (nonatomic) NSInteger number;
+
+@end
+
 @implementation OmdbAPi
 
 
 
-// NSoperation que
-// Image downloading collectionview operation
+
 
 +(void)getMoviesForSelection:(NSString *)searchedMovieName WithCompletion:(void (^) (NSArray *movies)) completion {
     
@@ -39,10 +43,6 @@
            
             MovieObject *movieObject = [[MovieObject alloc]initWithDictionar:singleMovie];
             
-           // FavoriteMoviesDataStore *dataStore = [FavoriteMoviesDataStore sharedDataStore];
-            
-            
-            
             [movieObjects addObject:movieObject];
             
         }
@@ -54,7 +54,44 @@
 
 }
 
-
++(void)getMoreMoviesForSelection:(NSString *)searchedMovieName WithCompletion:(void (^) (NSArray *movies)) completion {
+    
+    NSString *newString = [searchedMovieName stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+    
+    NSUInteger one = 1;
+    
+    if (one >= 1) {
+        
+        one = one + 1;
+        
+    }
+    
+    NSLog(@"%lu",one);
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://www.omdbapi.com/?s=%@&page=%lu",newString,one];
+    
+    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
+    
+    [sessionManager GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        NSArray *moviesSorted = [responseObject valueForKey:@"Search"];
+        
+        NSMutableArray *movieObjects = [NSMutableArray new];
+        
+        for (NSDictionary *singleMovie  in moviesSorted) {
+            
+            MovieObject *movieObject = [[MovieObject alloc]initWithDictionar:singleMovie];
+            
+            [movieObjects addObject:movieObject];
+            
+        }
+        completion(movieObjects);
+        
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        NSLog(@"Error : %@",error);
+    }];
+    
+}
 
 +(void)getDictionary:(NSString *)movieID withCompletion:(void (^)(NSDictionary  *dictionary) )completion{
     
@@ -118,93 +155,6 @@
     
 }
 
-
-
-
-//+(void)getMovieForSelection:(NSString *)movieID withCompletion:(void (^) (Movie *movie))completion{
-//    
-//    movieID = movieID;
-//    NSString *urlString = [NSString stringWithFormat:@"http://www.omdbapi.com/?i=%@&plot=short&r=json",movieID];
-//    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
-//    
-//    [sessionManager GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        
-//        NSArray *moviesSorted = [NSArray arrayWithObject:responseObject];
-//        
-//        FavoriteMoviesDataStore *dataStore = [FavoriteMoviesDataStore sharedDataStore];
-//       
-//      Movie *movieTapped = [NSEntityDescription insertNewObjectForEntityForName:@"Movie" inManagedObjectContext:dataStore.managedObjectContext];
-//        
-//        
-//        for (NSDictionary *singleMovie in moviesSorted) {
-//
-//            movieTapped.title = [singleMovie valueForKey:@"Title"];
-//            movieTapped.type = [singleMovie valueForKey:@"Type"];
-//            movieTapped.omdbID = [singleMovie valueForKey:@"imdbID"];
-//            movieTapped.poster = [singleMovie valueForKey:@"Poster"];
-//            
-//            movieTapped.year = [singleMovie valueForKey:@"Year"];
-//            movieTapped.director = [singleMovie valueForKey:@"Director"];
-//            movieTapped.writer = [singleMovie valueForKey:@"Writer"];
-//            movieTapped.stars = [singleMovie valueForKey:@"Actors"];
-//            movieTapped.imdbScore = [singleMovie valueForKey:@"imdbRating"];
-//            movieTapped.plot = [singleMovie valueForKey:@"Plot"];
-//            
-//        }
-//       completion(movieTapped);
-//        
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//    
-//        NSLog(@" ERROR: %@",error); 
-//        
-//    }];
-//
-//}
-//
-//
-//
-//+(void)getPlotSelection:(NSString *)movieID withCompletion:(void (^) (Movie *movie))completion{
-//    
-//    movieID = movieID;
-//    NSLog(@"movie id is %@",movieID);
-//    NSString *urlString = [NSString stringWithFormat:@"http://www.omdbapi.com/?i=%@&plot=full&r=json",movieID];
-//    NSLog(@" URL STRING IS %@",urlString);
-//    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
-//    
-//    [sessionManager GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-//        
-//        NSArray *moviesSorted = [NSArray arrayWithObject:responseObject];
-//        
-//        FavoriteMoviesDataStore *dataStore = [FavoriteMoviesDataStore sharedDataStore];
-//        Movie *movieTapped = [NSEntityDescription insertNewObjectForEntityForName:@"Movie" inManagedObjectContext:dataStore.managedObjectContext];
-//        
-//        
-//        for (NSDictionary *singleMovie in moviesSorted) {
-//            
-//            movieTapped.title = [singleMovie valueForKey:@"Title"];
-//            movieTapped.type = [singleMovie valueForKey:@"Type"];
-//            movieTapped.omdbID = [singleMovie valueForKey:@"imdbID"];
-//            movieTapped.poster = [singleMovie valueForKey:@"Poster"];
-//            
-//            movieTapped.year = [singleMovie valueForKey:@"Year"];
-//            movieTapped.director = [singleMovie valueForKey:@"Director"];
-//            movieTapped.writer = [singleMovie valueForKey:@"Writer"];
-//            movieTapped.stars = [singleMovie valueForKey:@"Actors"];
-//            movieTapped.imdbScore = [singleMovie valueForKey:@"imdbRating"];
-//            movieTapped.plot = [singleMovie valueForKey:@"Plot"];
-//            
-//            
-//        }
-//        completion(movieTapped);
-//
-//        
-//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//        
-//        NSLog(@" ERROR: %@",error);
-//        
-//    }];
-//    
-//}
 
 
 @end
