@@ -16,6 +16,7 @@
 
 - (void)saveContext;
 -(void)fetchData;
+-(void)deleteItem ;
 
 @property (nonatomic, strong) NSArray *favoriteMovies;
 @property (nonatomic ,strong) FavoriteMoviesDataStore *dataStore; 

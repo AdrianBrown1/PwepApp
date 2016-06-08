@@ -20,13 +20,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-//    UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
-//    UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-//    blurEffectView.frame = self.blurBackGroundView.bounds;
-//    blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-//    
-//    [self.blurBackGroundView addSubview:blurEffectView];
-    
     
     
     [OmdbAPi getDictionary:self.movie.omdbID withCompletion:^(NSDictionary *dictionary) {

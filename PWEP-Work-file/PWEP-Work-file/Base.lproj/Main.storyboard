@@ -21,7 +21,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DUQ-cP-NdK">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.27802092865239253" green="0.29583098711003963" blue="0.33049988746643066" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jXP-JQ-g2y">
                                     <size key="itemSize" width="150" height="200"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -39,17 +39,28 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ULn-gc-iBT">
                                                     <rect key="frame" x="0.0" y="0.0" width="150" height="200"/>
                                                 </imageView>
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pk9-dU-GQW">
+                                                    <rect key="frame" x="0.0" y="50" width="150" height="100"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
                                             <constraint firstItem="ULn-gc-iBT" firstAttribute="centerX" secondItem="YdV-89-BQx" secondAttribute="centerX" id="6P6-lM-GsA"/>
+                                            <constraint firstItem="pk9-dU-GQW" firstAttribute="height" secondItem="ULn-gc-iBT" secondAttribute="height" multiplier="0.5" id="9zn-M4-Qqt"/>
+                                            <constraint firstItem="pk9-dU-GQW" firstAttribute="centerX" secondItem="ULn-gc-iBT" secondAttribute="centerX" id="HmB-xH-ibH"/>
                                             <constraint firstItem="ULn-gc-iBT" firstAttribute="width" secondItem="YdV-89-BQx" secondAttribute="width" id="Vki-U8-aCD"/>
                                             <constraint firstItem="ULn-gc-iBT" firstAttribute="centerY" secondItem="YdV-89-BQx" secondAttribute="centerY" id="k8d-oo-Yzg"/>
+                                            <constraint firstItem="pk9-dU-GQW" firstAttribute="centerY" secondItem="ULn-gc-iBT" secondAttribute="centerY" id="kvf-Lq-5UN"/>
                                             <constraint firstItem="ULn-gc-iBT" firstAttribute="height" secondItem="YdV-89-BQx" secondAttribute="height" id="nFJ-GD-hRm"/>
+                                            <constraint firstItem="pk9-dU-GQW" firstAttribute="width" secondItem="ULn-gc-iBT" secondAttribute="width" id="wYp-2q-Sy8"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="cellImage" destination="ULn-gc-iBT" id="gpE-HO-Vhw"/>
+                                            <outlet property="noPosterLabel" destination="pk9-dU-GQW" id="ai0-DW-glN"/>
                                             <segue destination="fRt-hO-ry3" kind="show" identifier="MovieSelectedSegue" id="rAM-hu-AYr"/>
                                         </connections>
                                     </collectionViewCell>
@@ -143,22 +154,32 @@
                                     <segue destination="Wfv-M9-wiO" kind="show" identifier="plotSegue" id="Ics-XW-nup"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5f6-x8-1XV">
+                                <rect key="frame" x="279" y="154" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="grg-F5-ASY" firstAttribute="width" secondItem="hIi-ZZ-sRf" secondAttribute="width" id="1Md-ox-4zw"/>
+                            <constraint firstItem="5f6-x8-1XV" firstAttribute="width" secondItem="LlR-P2-tev" secondAttribute="width" id="2PK-7d-8nl"/>
                             <constraint firstItem="grg-F5-ASY" firstAttribute="leading" secondItem="hIi-ZZ-sRf" secondAttribute="leadingMargin" constant="10" id="4yu-x8-G0A"/>
                             <constraint firstItem="LlR-P2-tev" firstAttribute="width" secondItem="hIi-ZZ-sRf" secondAttribute="width" multiplier="0.35" id="8VW-fZ-i4c"/>
                             <constraint firstItem="grg-F5-ASY" firstAttribute="centerY" secondItem="hIi-ZZ-sRf" secondAttribute="centerY" multiplier="1.5" id="9dr-Cg-3J4"/>
                             <constraint firstItem="grg-F5-ASY" firstAttribute="centerX" secondItem="hIi-ZZ-sRf" secondAttribute="centerX" id="AFQ-XQ-uBa"/>
                             <constraint firstItem="2KA-IE-Rwj" firstAttribute="centerY" secondItem="hIi-ZZ-sRf" secondAttribute="centerY" multiplier="1.8" constant="-15" id="AeZ-18-Hgn"/>
                             <constraint firstItem="VK2-N9-nwn" firstAttribute="leading" secondItem="hIi-ZZ-sRf" secondAttribute="leadingMargin" constant="10" id="Dgi-zK-GHW"/>
+                            <constraint firstItem="5f6-x8-1XV" firstAttribute="centerX" secondItem="LlR-P2-tev" secondAttribute="centerX" id="IJ3-XF-CV6"/>
                             <constraint firstItem="VK2-N9-nwn" firstAttribute="width" secondItem="hIi-ZZ-sRf" secondAttribute="width" multiplier="0.9" id="KN2-Pi-D9v"/>
                             <constraint firstItem="grg-F5-ASY" firstAttribute="height" secondItem="hIi-ZZ-sRf" secondAttribute="height" multiplier="0.2" id="RdC-aE-Vgc"/>
                             <constraint firstItem="VK2-N9-nwn" firstAttribute="centerX" secondItem="hIi-ZZ-sRf" secondAttribute="centerX" id="ULJ-2j-Ehj"/>
+                            <constraint firstItem="5f6-x8-1XV" firstAttribute="height" secondItem="LlR-P2-tev" secondAttribute="height" multiplier="0.5" id="Vps-uj-dc4"/>
                             <constraint firstItem="2KA-IE-Rwj" firstAttribute="leading" secondItem="hIi-ZZ-sRf" secondAttribute="leadingMargin" constant="10" id="YRe-xw-xJC"/>
                             <constraint firstItem="LlR-P2-tev" firstAttribute="centerY" secondItem="hIi-ZZ-sRf" secondAttribute="centerY" multiplier="0.5" constant="15" id="Zcz-U9-jlP"/>
                             <constraint firstItem="VK2-N9-nwn" firstAttribute="centerY" secondItem="hIi-ZZ-sRf" secondAttribute="centerY" multiplier="1.1" id="Zmk-KS-Edw"/>
+                            <constraint firstItem="5f6-x8-1XV" firstAttribute="centerY" secondItem="LlR-P2-tev" secondAttribute="centerY" id="dVt-87-HBt"/>
                             <constraint firstItem="2KA-IE-Rwj" firstAttribute="height" secondItem="hIi-ZZ-sRf" secondAttribute="height" multiplier="0.1" constant="-27" id="fga-f3-4en"/>
                             <constraint firstItem="2KA-IE-Rwj" firstAttribute="centerX" secondItem="hIi-ZZ-sRf" secondAttribute="centerX" id="lce-zw-lwF"/>
                             <constraint firstItem="LlR-P2-tev" firstAttribute="centerX" secondItem="hIi-ZZ-sRf" secondAttribute="centerX" id="mYI-Y3-bGA"/>
@@ -169,6 +190,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="DO2-LH-vxC"/>
                     <connections>
+                        <outlet property="PosterLabel" destination="5f6-x8-1XV" id="g7M-WL-viC"/>
                         <outlet property="directorLabel" destination="jiG-db-nBZ" id="3w7-rP-hxJ"/>
                         <outlet property="imdbScoreLabel" destination="FTS-VB-EHK" id="WNq-KN-xJ5"/>
                         <outlet property="movieImage" destination="LlR-P2-tev" id="WGH-wf-Stc"/>
@@ -415,6 +437,11 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="keyPath">
+                            <color key="value" red="0.91748708486557007" green="0.8199726939201355" blue="0.2645753026008606" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
                         <segue destination="Y4O-y6-yPF" kind="relationship" relationship="viewControllers" id="WQa-gY-05O"/>
                         <segue destination="45v-o5-v1n" kind="relationship" relationship="viewControllers" id="hFN-RY-HCi"/>

@@ -29,12 +29,8 @@
 -(void)fetchData {
     
         NSFetchRequest *allItemsRequest = [NSFetchRequest fetchRequestWithEntityName:@"Movie"];
-    
-    
-    
         self.favoriteMovies = [self.managedObjectContext executeFetchRequest:allItemsRequest error:nil];
-    
-    
+    NSLog(@"end of fetch");
 
 }
 - (void)saveContext
@@ -48,6 +44,29 @@
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
+    }
+}
+
+-(void)deleteItem {
+    
+    NSManagedObjectContext *context = self.managedObjectContext;
+    
+    NSLog(@" What are you %@", context);
+    
+    NSManagedObject *contextM = [NSEntityDescription
+                                   insertNewObjectForEntityForName:@"Movie"
+                                   inManagedObjectContext:context];
+    
+    NSLog(@" what are youuuu %@", contextM);
+    
+    [context deleteObject:contextM];
+
+    
+    [self saveContext];
+    
+    NSError *error;
+    if (![context save:&error]) {
+        // Handle the error.
     }
 }
 

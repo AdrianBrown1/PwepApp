@@ -13,6 +13,8 @@
 		0A30C0E01CD2ACCB00A933BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A30C0DE1CD2ACCB00A933BD /* Main.storyboard */; };
 		0A30C0E21CD2ACCB00A933BD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A30C0E11CD2ACCB00A933BD /* Assets.xcassets */; };
 		0A30C0E51CD2ACCB00A933BD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A30C0E31CD2ACCB00A933BD /* LaunchScreen.storyboard */; };
+		0A36D8F81D07274F00FA610B /* backgroundImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A36D8F71D07274F00FA610B /* backgroundImage.png */; };
+		0A36D9001D07A2F100FA610B /* whiteblank.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0A36D8FF1D07A2F100FA610B /* whiteblank.jpg */; };
 		0A8C381C1CD2B55D00A42B6B /* MainPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8C381B1CD2B55D00A42B6B /* MainPageViewController.m */; };
 		0A8C381F1CD2B5E700A42B6B /* SelectedMovieViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8C381E1CD2B5E700A42B6B /* SelectedMovieViewController.m */; };
 		0A8C38221CD2B61E00A42B6B /* MovieDecsriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8C38211CD2B61E00A42B6B /* MovieDecsriptionViewController.m */; };
@@ -44,6 +46,8 @@
 		0A30C0E11CD2ACCB00A933BD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A30C0E41CD2ACCB00A933BD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A30C0E61CD2ACCB00A933BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A36D8F71D07274F00FA610B /* backgroundImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = backgroundImage.png; path = ../../../Downloads/backgroundImage.png; sourceTree = "<group>"; };
+		0A36D8FF1D07A2F100FA610B /* whiteblank.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = whiteblank.jpg; path = ../../../Downloads/whiteblank.jpg; sourceTree = "<group>"; };
 		0A8C381A1CD2B55D00A42B6B /* MainPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainPageViewController.h; sourceTree = "<group>"; };
 		0A8C381B1CD2B55D00A42B6B /* MainPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainPageViewController.m; sourceTree = "<group>"; };
 		0A8C381D1CD2B5E700A42B6B /* SelectedMovieViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectedMovieViewController.h; sourceTree = "<group>"; };
@@ -117,31 +121,13 @@
 				0A30C0DE1CD2ACCB00A933BD /* Main.storyboard */,
 				0A30C0D81CD2ACCB00A933BD /* AppDelegate.h */,
 				0A30C0D91CD2ACCB00A933BD /* AppDelegate.m */,
-				0A8C381A1CD2B55D00A42B6B /* MainPageViewController.h */,
-				0A8C381B1CD2B55D00A42B6B /* MainPageViewController.m */,
-				0A8C382C1CD7E65600A42B6B /* MovieCollectionViewCell.h */,
-				0A8C382D1CD7E65600A42B6B /* MovieCollectionViewCell.m */,
-				0A8C38311CD7F3CD00A42B6B /* ReloadDataFooterCollectionReusableView.h */,
-				0A8C38321CD7F3CD00A42B6B /* ReloadDataFooterCollectionReusableView.m */,
-				0A8C381D1CD2B5E700A42B6B /* SelectedMovieViewController.h */,
-				0A8C381E1CD2B5E700A42B6B /* SelectedMovieViewController.m */,
-				0A8C38201CD2B61E00A42B6B /* MovieDecsriptionViewController.h */,
-				0A8C38211CD2B61E00A42B6B /* MovieDecsriptionViewController.m */,
-				0AF498261CEE9B00002D98F2 /* FavoriteMovieTableViewController.h */,
-				0AF498271CEE9B00002D98F2 /* FavoriteMovieTableViewController.m */,
-				0AF498311CEF9C71002D98F2 /* FavovriteMovieTableViewCell.h */,
-				0AF498321CEF9C71002D98F2 /* FavovriteMovieTableViewCell.m */,
-				0A8C38261CD5626600A42B6B /* FavoritesDescriptionViewController.h */,
-				0A8C38271CD5626600A42B6B /* FavoritesDescriptionViewController.m */,
-				0A8C38291CD562C400A42B6B /* FavoritesPlotViewController.h */,
-				0A8C382A1CD562C400A42B6B /* FavoritesPlotViewController.m */,
-				0A8C38341CD7FEDE00A42B6B /* OmdbAPi.h */,
-				0A8C38351CD7FEDE00A42B6B /* OmdbAPi.m */,
-				0AF498211CED0095002D98F2 /* FavoriteMoviesDataStore.h */,
-				0AF498221CED0095002D98F2 /* FavoriteMoviesDataStore.m */,
-				0AF4982E1CEF9453002D98F2 /* MovieObject.h */,
-				0AF4982F1CEF9453002D98F2 /* MovieObject.m */,
+				0A36D9031D07A92300FA610B /* ViewControllers */,
+				0A36D9041D07A97000FA610B /* Custom Cells */,
+				0A36D9021D07A8EF00FA610B /* CoreData */,
+				0A36D9011D07A89C00FA610B /* API-file */,
 				0A30C0E11CD2ACCB00A933BD /* Assets.xcassets */,
+				0A36D8FF1D07A2F100FA610B /* whiteblank.jpg */,
+				0A36D8F71D07274F00FA610B /* backgroundImage.png */,
 				0AF4982B1CEEC040002D98F2 /* noun_338176_cc.png */,
 				0A8C382F1CD7E75A00A42B6B /* jeremy.jpg */,
 				0A2DFD091CF3765C0053F8F8 /* noun_135445_cc.png */,
@@ -149,11 +135,6 @@
 				0A30C0E31CD2ACCB00A933BD /* LaunchScreen.storyboard */,
 				0A30C0E61CD2ACCB00A933BD /* Info.plist */,
 				0A30C0D51CD2ACCB00A933BD /* Supporting Files */,
-				0AF498181CECEC00002D98F2 /* MovieModel.xcdatamodeld */,
-				0AF4981B1CECEC9A002D98F2 /* Movie+CoreDataProperties.h */,
-				0AF4981C1CECEC9A002D98F2 /* Movie+CoreDataProperties.m */,
-				0AF4981D1CECEC9A002D98F2 /* Movie.h */,
-				0AF498241CEE13AA002D98F2 /* Movie.m */,
 			);
 			path = "PWEP-Work-file";
 			sourceTree = "<group>";
@@ -162,8 +143,73 @@
 			isa = PBXGroup;
 			children = (
 				0A30C0D61CD2ACCB00A933BD /* main.m */,
+				0A36D9051D07AA7800FA610B /* MovieObjects */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0A36D9011D07A89C00FA610B /* API-file */ = {
+			isa = PBXGroup;
+			children = (
+				0A8C38341CD7FEDE00A42B6B /* OmdbAPi.h */,
+				0A8C38351CD7FEDE00A42B6B /* OmdbAPi.m */,
+			);
+			name = "API-file";
+			sourceTree = "<group>";
+		};
+		0A36D9021D07A8EF00FA610B /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				0AF498211CED0095002D98F2 /* FavoriteMoviesDataStore.h */,
+				0AF498221CED0095002D98F2 /* FavoriteMoviesDataStore.m */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		0A36D9031D07A92300FA610B /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0A8C381A1CD2B55D00A42B6B /* MainPageViewController.h */,
+				0A8C381B1CD2B55D00A42B6B /* MainPageViewController.m */,
+				0A8C381D1CD2B5E700A42B6B /* SelectedMovieViewController.h */,
+				0A8C381E1CD2B5E700A42B6B /* SelectedMovieViewController.m */,
+				0A8C38201CD2B61E00A42B6B /* MovieDecsriptionViewController.h */,
+				0A8C38211CD2B61E00A42B6B /* MovieDecsriptionViewController.m */,
+				0AF498261CEE9B00002D98F2 /* FavoriteMovieTableViewController.h */,
+				0AF498271CEE9B00002D98F2 /* FavoriteMovieTableViewController.m */,
+				0A8C38261CD5626600A42B6B /* FavoritesDescriptionViewController.h */,
+				0A8C38271CD5626600A42B6B /* FavoritesDescriptionViewController.m */,
+				0A8C38291CD562C400A42B6B /* FavoritesPlotViewController.h */,
+				0A8C382A1CD562C400A42B6B /* FavoritesPlotViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		0A36D9041D07A97000FA610B /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0A8C382C1CD7E65600A42B6B /* MovieCollectionViewCell.h */,
+				0A8C382D1CD7E65600A42B6B /* MovieCollectionViewCell.m */,
+				0A8C38311CD7F3CD00A42B6B /* ReloadDataFooterCollectionReusableView.h */,
+				0A8C38321CD7F3CD00A42B6B /* ReloadDataFooterCollectionReusableView.m */,
+				0AF498311CEF9C71002D98F2 /* FavovriteMovieTableViewCell.h */,
+				0AF498321CEF9C71002D98F2 /* FavovriteMovieTableViewCell.m */,
+			);
+			name = "Custom Cells";
+			sourceTree = "<group>";
+		};
+		0A36D9051D07AA7800FA610B /* MovieObjects */ = {
+			isa = PBXGroup;
+			children = (
+				0AF4982E1CEF9453002D98F2 /* MovieObject.h */,
+				0AF4982F1CEF9453002D98F2 /* MovieObject.m */,
+				0AF498181CECEC00002D98F2 /* MovieModel.xcdatamodeld */,
+				0AF4981B1CECEC9A002D98F2 /* Movie+CoreDataProperties.h */,
+				0AF4981C1CECEC9A002D98F2 /* Movie+CoreDataProperties.m */,
+				0AF4981D1CECEC9A002D98F2 /* Movie.h */,
+				0AF498241CEE13AA002D98F2 /* Movie.m */,
+			);
+			name = MovieObjects;
 			sourceTree = "<group>";
 		};
 		3FC9BB0360B795C6D6CBB054 /* Pods */ = {
@@ -245,12 +291,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A2DFD0A1CF3765C0053F8F8 /* noun_135445_cc.png in Resources */,
+				0A36D8F81D07274F00FA610B /* backgroundImage.png in Resources */,
 				0A30C0E51CD2ACCB00A933BD /* LaunchScreen.storyboard in Resources */,
 				0A8C38301CD7E75A00A42B6B /* jeremy.jpg in Resources */,
 				0A30C0E21CD2ACCB00A933BD /* Assets.xcassets in Resources */,
 				0AF4982A1CEEBF96002D98F2 /* noun_156706_cc.png in Resources */,
 				0A30C0E01CD2ACCB00A933BD /* Main.storyboard in Resources */,
 				0AF4982C1CEEC040002D98F2 /* noun_338176_cc.png in Resources */,
+				0A36D9001D07A2F100FA610B /* whiteblank.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

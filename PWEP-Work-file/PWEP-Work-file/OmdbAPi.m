@@ -19,15 +19,9 @@
 @implementation OmdbAPi
 
 
-
-
-
 +(void)getMoviesForSelection:(NSString *)searchedMovieName WithCompletion:(void (^) (NSArray *movies)) completion {
     
     NSString *newString = [searchedMovieName stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-
-    //searchedMovieName = [NSString stringWithFormat:@"s=star+wars&page=1"];
-   // NSString *urlString = [NSString stringWithFormat:@"http://www.omdbapi.com/?s=%@&page=1",newString];
     
    NSString *urlString = [NSString stringWithFormat:@"http://www.omdbapi.com/?s=%@&page=1",newString];
     
@@ -54,40 +48,49 @@
 
 }
 
-+(void)getMoreMoviesForSelection:(NSString *)searchedMovieName WithCompletion:(void (^) (NSArray *movies)) completion {
++(void)getMoreMoviesForSelection:(NSString *)searchedMovieName currentCount:(NSUInteger)currentCount WithCompletion:(void (^) (NSArray *movies)) completion {
     
     NSString *newString = [searchedMovieName stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-    
-    NSUInteger one = 1;
-    
-    if (one >= 1) {
-        
-        one = one + 1;
-        
-    }
-    
-    NSLog(@"%lu",one);
-    
-    NSString *urlString = [NSString stringWithFormat:@"http://www.omdbapi.com/?s=%@&page=%lu",newString,one];
+   
+    NSString *urlString = [NSString stringWithFormat:@"http://www.omdbapi.com/?s=%@",newString];
     
     AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
     
     [sessionManager GET:urlString parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+ 
+       NSString *totalResults = [responseObject valueForKey:@"totalResults"];
+       
+        NSUInteger totalPages = [totalResults integerValue] / 10 + 1;
         
-        NSArray *moviesSorted = [responseObject valueForKey:@"Search"];
         
-        NSMutableArray *movieObjects = [NSMutableArray new];
+        NSUInteger nextPage = currentCount / 10 + 1;
         
-        for (NSDictionary *singleMovie  in moviesSorted) {
+        if (nextPage <= totalPages) {
+        
+        NSString *nextPageUrl = [NSString stringWithFormat:@"http://www.omdbapi.com/?s=%@&page=%lu",newString,nextPage];
+        
+        [sessionManager GET:nextPageUrl parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             
-            MovieObject *movieObject = [[MovieObject alloc]initWithDictionar:singleMovie];
+            NSArray *moviesSorted = [responseObject valueForKey:@"Search"];
             
-            [movieObjects addObject:movieObject];
+            NSMutableArray *movieObjects = [NSMutableArray new];
             
-        }
-        completion(movieObjects);
+            for (NSDictionary *singleMovie  in moviesSorted) {
+                
+                MovieObject *movieObject = [[MovieObject alloc]initWithDictionar:singleMovie];
+                
+                [movieObjects addObject:movieObject];
+                
+            }
+            completion(movieObjects);
+            
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"%@",error);
+        
+        }];
+    }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"Error : %@",error);
     }];
     

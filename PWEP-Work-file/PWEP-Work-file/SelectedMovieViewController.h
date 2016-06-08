@@ -24,5 +24,6 @@
 @property (strong, nonatomic) NSString *imdbID;
 @property (strong, nonatomic) Movie *movie;
 @property (strong, nonatomic)NSMutableDictionary *dictionary;
+@property (weak, nonatomic) IBOutlet UILabel *PosterLabel;
 
 @end

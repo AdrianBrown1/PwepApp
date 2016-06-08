@@ -18,7 +18,7 @@
 
 +(void)getMoviesForSelection:(NSString *)searchedMovieName WithCompletion:(void (^) (NSArray *movies)) completion;
 
-+(void)getMoreMoviesForSelection:(NSString *)searchedMovieName WithCompletion:(void (^) (NSArray *movies)) completion;
++(void)getMoreMoviesForSelection:(NSString *)searchedMovieName currentCount:(NSUInteger)currentCount WithCompletion:(void (^) (NSArray *movies)) completion;
 
 +(void)getDictionary:(NSString *)movieID withCompletion:(void (^)(NSDictionary  *dictionary) )completion;
 

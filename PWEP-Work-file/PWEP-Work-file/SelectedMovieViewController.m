@@ -29,6 +29,8 @@
         NSString *year = [NSString stringWithFormat:@"Released: %@",[dictionary valueForKey:@"Year"]];
         NSString *imdbScore = [NSString stringWithFormat:@"IMDB Score: %@",[dictionary valueForKey:@"imdbRating"]];
         NSString *plot = [NSString stringWithFormat:@"%@",[dictionary valueForKey:@"Plot"]];
+        NSString *poster = [NSString stringWithFormat:@"%@",[dictionary valueForKey:@"Poster"]];
+        NSString *title = [NSString stringWithFormat:@"%@",[dictionary valueForKey:@"Title"]];
         
         self.directorLabel.text = director;
         self.writerLabel.text = writer;
@@ -37,6 +39,14 @@
         self.imdbScoreLabel.text = imdbScore;
         self.movieTextView.text = plot;
         
+        
+        if ([poster isEqualToString:@"N/A"]) {
+            NSLog(@"%@",poster);
+            
+            self.PosterLabel.text = title; 
+            self.movieImage.image =[UIImage imageNamed:@"whiteblank.jpg"];
+        }
+        else {
         
         NSOperationQueue *backgroundQueue = [NSOperationQueue new];
         
@@ -57,9 +67,9 @@
             }];
             
         }];
+    }
         
         [self.dictionary addEntriesFromDictionary:dictionary];
-        NSLog(@"dictionary %@ ====== ",self.dictionary);
         
     }];
     

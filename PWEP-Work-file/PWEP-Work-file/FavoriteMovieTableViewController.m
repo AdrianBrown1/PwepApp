@@ -24,19 +24,27 @@
     [super viewDidLoad];
     
     self.allMovies = [NSMutableArray new];
-    
+
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     FavoriteMoviesDataStore *dataStore = [FavoriteMoviesDataStore sharedDataStore];
     
     [dataStore fetchData];
     
-    
-    
-    
+    [self.allMovies removeAllObjects];
     [self.allMovies addObjectsFromArray:dataStore.favoriteMovies];
-    
 
+    [self.tableView reloadData];
 }
+
+
+
+
+
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
     [self.tableView reloadData];
@@ -46,7 +54,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -88,20 +95,40 @@
     return cell;
 }
 
+// DELETE CELL
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+
+        // get movie
+        
+        Movie *movie = [self.allMovies objectAtIndex:indexPath.row];
+        
+        
+        [self.allMovies removeObjectAtIndex:indexPath.row];
+        
+        FavoriteMoviesDataStore *dataStore = [FavoriteMoviesDataStore sharedDataStore];
+        
+        [dataStore.managedObjectContext deleteObject:movie];
+        
+        [dataStore saveContext];
+        
+        [tableView reloadData];
+        
+    }
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if ([[segue identifier] isEqualToString:@"movieCellSegue"] ) {
-       
-        
-        
+     
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
 
-
         FavoritesDescriptionViewController *destinationVC = [segue destinationViewController];
-        
         
         destinationVC.movie = [self.allMovies objectAtIndex:indexPath.row]; ;
         

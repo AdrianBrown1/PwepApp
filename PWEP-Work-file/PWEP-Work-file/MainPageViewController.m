@@ -18,6 +18,7 @@
 @property (weak, nonatomic)UIButton *button;
 @property (nonatomic, strong)Movie *movie;
 @property (nonatomic) NSIndexPath *indexPath;
+@property (nonatomic, strong) NSString *searchBar;
 @end
 
 @implementation MainPageViewController
@@ -26,7 +27,8 @@
     [super viewDidLoad];
     
     self.MovieArray = [NSMutableArray new];
-    //Search Bar
+    self.searchBar = [[NSString alloc]init];
+
     self.sBar = [[UISearchBar alloc]initWithFrame:CGRectMake(0,10,self.navigationController.navigationBar.bounds.size.width,self.navigationController.navigationBar.bounds.size.height/2)];
    
     self.sBar.delegate = self;
@@ -36,13 +38,17 @@
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     
+    self.view.backgroundColor = [UIColor redColor]; 
+    
     [self.view addSubview:self.collectionView];
     
     NSArray *randomMovie = @[@"star wars", @"ninja",@"basketball",@"racing"];
     
     
-    
     NSString *myString = [randomMovie objectAtIndex:arc4random()%[randomMovie count]];
+    
+    
+    self.searchBar = myString;
     
     [OmdbAPi getMoviesForSelection:myString WithCompletion:^(NSArray *movies) {
         
@@ -61,12 +67,15 @@
 
 // Hide SearchBar
 -(void)hideKeyBoard {
-//    [self.sBar resignFirstResponder];
+    [self.sBar resignFirstResponder];
 }
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     [searchBar resignFirstResponder];
+    
+    self.searchBar = searchBar.text; 
+    
     
     NSString *userSearched = searchBar.text;
     
@@ -97,19 +106,25 @@
    
    MovieCollectionViewCell *movieCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     
+   
+    Movie *singleMovie = self.MovieArray[indexPath.row];
+
+    if ([singleMovie.poster isEqualToString:@"N/A"]) {
+        
+        movieCell.cellImage.image = [UIImage imageNamed:@"whiteblank.jpg"]; 
+        movieCell.noPosterLabel.hidden = NO;
+        movieCell.noPosterLabel.text = singleMovie.title;
+    
+    }
+    else {
+    
+    
+    
     NSOperationQueue *backgroundQueue = [NSOperationQueue new];
     
     [backgroundQueue addOperationWithBlock:^{
         
-        Movie *singleMovie = self.MovieArray[indexPath.row];
         
-        NSLog(@"poster = %@",singleMovie.poster);
-        
-        if ([singleMovie.poster isEqualToString:@"n/a"]) {
-           
-            
-            movieCell.cellImage.image =[UIImage imageNamed:@"jeremy.jpg"];
-        }
         
             NSURL *url = [NSURL URLWithString:singleMovie.poster];
             
@@ -120,11 +135,14 @@
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             
              movieCell.cellImage.image = posterImage;
+
         
         }];
         
         
     }];
+        
+    }
 
     return movieCell;
 }
@@ -176,25 +194,8 @@
 // protocol method being implemented 
 -(void)buttonPressed:(UIButton *)button {
     
-    NSString *starwars = @"star wars";
-
-    
-    
-    
-    //create a property called search term so when search bar is used it updates the property with the user input
-    // once i have the search term i can pass forward that term.
-    
-    // loading the pages.
-    
-    // total results value
-    
-    // pass forward integer value of array count 
-    
-    
-    
-    
-    [OmdbAPi getMoreMoviesForSelection:starwars WithCompletion:^(NSArray *movies) {
-        
+    [OmdbAPi getMoreMoviesForSelection:self.searchBar currentCount:self.MovieArray.count WithCompletion:^(NSArray *movies) {
+       
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             
             [self.MovieArray addObjectsFromArray:movies];
@@ -202,8 +203,9 @@
             [self.collectionView reloadData];
             
         }];
-        
+
     }];
+    
     
 
 }
