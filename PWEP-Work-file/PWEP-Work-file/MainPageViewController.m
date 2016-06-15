@@ -38,7 +38,6 @@
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     
-    self.view.backgroundColor = [UIColor redColor]; 
     
     [self.view addSubview:self.collectionView];
     
@@ -61,6 +60,7 @@
         }];
         
     }];
+
 
     
 }

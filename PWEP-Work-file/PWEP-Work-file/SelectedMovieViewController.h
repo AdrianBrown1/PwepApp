@@ -21,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *writerLabel;
 @property (weak, nonatomic) IBOutlet UILabel *starsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *imdbScoreLabel;
+
+
 @property (strong, nonatomic) NSString *imdbID;
 @property (strong, nonatomic) Movie *movie;
 @property (strong, nonatomic)NSMutableDictionary *dictionary;

@@ -27,7 +27,7 @@
         NSString *director = [NSString stringWithFormat:@"Director: %@",[dictionary valueForKey:@"Director"]];
         NSString *writer = [NSString stringWithFormat:@"Writer: %@",[dictionary valueForKey:@"Writer"]];
         NSString *stars = [NSString stringWithFormat:@"Stars: %@",[dictionary valueForKey:@"Actors"]];
-        //NSString *year = [NSString stringWithFormat:@"Released: %@",[dictionary valueForKey:@"Year"]];
+        NSString *year = [NSString stringWithFormat:@"Released: %@",[dictionary valueForKey:@"Year"]];
         NSString *imdbScore = [NSString stringWithFormat:@"IMDB Score: %@",[dictionary valueForKey:@"imdbRating"]];
         NSString *plot = [NSString stringWithFormat:@"%@",[dictionary valueForKey:@"Plot"]];
         
@@ -36,7 +36,17 @@
         self.starsLabel.text = stars;
         self.imdbScoreLabel.text = imdbScore;
         self.plotText.text = plot;
+        self.releasedLabel.text = year;
         
+        [self.directorLabel setTextColor:[UIColor colorWithRed:0.953f green:0.729f blue:0.106f alpha:1.0f]];
+        [self.writerLabel setTextColor:[UIColor colorWithRed:0.953f green:0.729f blue:0.106f alpha:1.0f]];
+        [self.starsLabel setTextColor:[UIColor colorWithRed:0.953f green:0.729f blue:0.106f alpha:1.0f]];
+        [self.releasedLabel setTextColor:[UIColor colorWithRed:0.953f green:0.729f blue:0.106f alpha:1.0f]];
+        [self.imdbScoreLabel setTextColor:[UIColor colorWithRed:0.953f green:0.729f blue:0.106f alpha:1.0f]];
+
+        
+        self.plotText.layer.cornerRadius = 10;
+
         
         NSOperationQueue *backgroundQueue = [NSOperationQueue new];
         

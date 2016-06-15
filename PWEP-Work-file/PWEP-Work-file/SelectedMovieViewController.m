@@ -40,10 +40,19 @@
         self.movieTextView.text = plot;
         
         
+        [self.directorLabel setTextColor:[UIColor colorWithRed:0.953f green:0.729f blue:0.106f alpha:1.0f]];
+        [self.writerLabel setTextColor:[UIColor colorWithRed:0.953f green:0.729f blue:0.106f alpha:1.0f]];
+        [self.starsLabel setTextColor:[UIColor colorWithRed:0.953f green:0.729f blue:0.106f alpha:1.0f]];
+        [self.releasedLabel setTextColor:[UIColor colorWithRed:0.953f green:0.729f blue:0.106f alpha:1.0f]];
+        [self.imdbScoreLabel setTextColor:[UIColor colorWithRed:0.953f green:0.729f blue:0.106f alpha:1.0f]];
+
+        self.movieTextView.layer.cornerRadius = 10;
+        
+        
         if ([poster isEqualToString:@"N/A"]) {
             NSLog(@"%@",poster);
             
-            self.PosterLabel.text = title; 
+            self.PosterLabel.text = title;
             self.movieImage.image =[UIImage imageNamed:@"whiteblank.jpg"];
         }
         else {
@@ -88,6 +97,15 @@
 -(IBAction)FavoriteMovie:(id)sender{
     
     NSLog(@"Ive been tapped !!");
+   
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Congradulations"                                         message:@"Movie has been added to favorites"                                    preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:nil]; 
+    [alertController addAction:actionOk];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
     
     FavoriteMoviesDataStore *dataStore = [FavoriteMoviesDataStore sharedDataStore];
     Movie *movie = [NSEntityDescription insertNewObjectForEntityForName:@"Movie" inManagedObjectContext:dataStore.managedObjectContext];

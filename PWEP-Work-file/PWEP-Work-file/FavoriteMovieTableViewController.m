@@ -66,9 +66,15 @@
     
    self.movie = [self.allMovies objectAtIndex:indexPath.row];
     
+    cell.directorLabel.text = self.movie.director;
     cell.titleLabel.text = self.movie.title;
     cell.writerLabel.text = self.movie.writer;
     cell.actorsLabel.text = self.movie.stars;
+    
+    [cell.titleLabel setTextColor:[UIColor colorWithRed:0.953f green:0.729f blue:0.106f alpha:1.0f]];
+    [cell.writerLabel setTextColor:[UIColor colorWithRed:0.953f green:0.729f blue:0.106f alpha:1.0f]];
+    [cell.actorsLabel setTextColor:[UIColor colorWithRed:0.953f green:0.729f blue:0.106f alpha:1.0f]];
+    [cell.directorLabel setTextColor:[UIColor colorWithRed:0.953f green:0.729f blue:0.106f alpha:1.0f]];
     
     
     // need to set image still 
@@ -118,6 +124,15 @@
         [dataStore saveContext];
         
         [tableView reloadData];
+        
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Congradulations"                                         message:@"Movie has been deleted from favorites"                                    preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:nil];
+        [alertController addAction:actionOk];
+        [self presentViewController:alertController animated:YES completion:nil];
         
     }
 }

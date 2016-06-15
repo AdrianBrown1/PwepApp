@@ -10,6 +10,7 @@
 #import "OmdbAPi.h"
 @interface FavoritesPlotViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *fullPlotText;
+@property (weak, nonatomic) IBOutlet UILabel *plotSummaryLabel;
 
 @end
 
@@ -18,12 +19,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.fullPlotText.layer.cornerRadius = 10;
+    
+    [self.plotSummaryLabel setFont:[UIFont fontWithName:@"Avenir" size:30]];
+    [self.plotSummaryLabel setTextColor:[UIColor colorWithRed:0.953f green:0.729f blue:0.106f alpha:1.0f]];
+    
+    [self.plotSummaryLabel setFont:[UIFont boldSystemFontOfSize:30]];
+
 
     [OmdbAPi getFullDictionary:self.movie.omdbID withCompletion:^(NSDictionary *dictionary) {
        
         NSString *plot = [NSString stringWithFormat:@"%@",[dictionary valueForKey:@"Plot"]];
         
         self.fullPlotText.text = plot;
+    
 
     }];
 
