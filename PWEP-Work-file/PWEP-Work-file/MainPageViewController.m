@@ -41,7 +41,7 @@
     
     [self.view addSubview:self.collectionView];
     
-    NSArray *randomMovie = @[@"star wars", @"ninja",@"basketball",@"racing"];
+    NSArray *randomMovie = @[@"star wars", @"dead",@"love",@"man"];
     
     
     NSString *myString = [randomMovie objectAtIndex:arc4random()%[randomMovie count]];
@@ -193,6 +193,8 @@
 
 // protocol method being implemented 
 -(void)buttonPressed:(UIButton *)button {
+    
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     [OmdbAPi getMoreMoviesForSelection:self.searchBar currentCount:self.MovieArray.count WithCompletion:^(NSArray *movies) {
        
